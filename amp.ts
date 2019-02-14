@@ -135,126 +135,50 @@ export interface AmpError {
     descr: string;
 }
 
-export const AmpErrors = {
-    2: {
-        descr: 'Discharge too long',
-    },
-    3: {
-        descr: 'Current during heat time',
-    },
-    4: {
-        descr: 'Regulation too long',
-    },
-    5: {
-        descr: 'Maximun current reached during regulation',
-    },
-    6: {
-        descr: 'Minimum current reached during regulation',
-    },
-    7: {
-        descr: 'Maximun reached during normal function',
-    },
-    8: {
-        descr: 'Minimum reached during normal function',
-    },
-    9: {
-        descr: 'Time elapsed with current out of range during normal function',
-    },
-    10: {
-        descr: 'Starting too long',
-    },
-    11: {
-        descr: 'Out of range during starting',
-    },
-    12: {
-        descr: 'Temperature maximum reached',
-    },
-    13: {
-        descr: 'Phase detection error',
-    },
-    14: {
-        descr: 'External stop',
-    },
-    15: {
-        descr: 'Minimun current reached',
-    },
-    16: {
-        descr: 'Maximun current reached',
-    },
-    17: {
-        descr: 'High voltage present during heat',
-    },
-    50: {
-        descr: 'Offline.',
-    },
-    51: {
-        descr: 'Time out.',
-    },
-    52: {
-        descr: 'Unknown request.',
-    },
-    53: {
-        descr: 'Error writing params.',
-    },
-    55: {
-        descr: 'Working point canot be set in auto mode.',
-    },
-    56: {
-        descr: 'Global request return different values from cards.',
-    },
-    57: {
-        descr: 'Busy.',
-    },
-} as { [key: number]: AmpError };
+export const AmpErrors = new Map<number, AmpError>();
+AmpErrors.set(2, { descr: 'Discharge too long' } as AmpError);
+AmpErrors.set(3, { descr: 'Current during heat time' } as AmpError);
+AmpErrors.set(4, { descr: 'Regulation too long' } as AmpError);
+AmpErrors.set(5, { descr: 'Maximun current reached during regulation' } as AmpError);
+AmpErrors.set(6, { descr: 'Minimum current reached during regulation' } as AmpError);
+AmpErrors.set(7, { descr: 'Maximun reached during normal function' } as AmpError);
+AmpErrors.set(8, { descr: 'Minimum reached during normal function' } as AmpError);
+AmpErrors.set(9, { descr: 'Time elapsed with current out of range during normal function' } as AmpError);
+AmpErrors.set(10, { descr: 'Starting too long' } as AmpError);
+AmpErrors.set(11, { descr: 'Out of range during starting' } as AmpError);
+AmpErrors.set(12, { descr: 'Temperature maximum reached' } as AmpError);
+AmpErrors.set(13, { descr: 'Phase detection error' } as AmpError);
+AmpErrors.set(14, { descr: 'External stop' } as AmpError);
+AmpErrors.set(15, { descr: 'Minimun current reached' } as AmpError);
+AmpErrors.set(16, { descr: 'Maximun current reached' } as AmpError);
+AmpErrors.set(17, { descr: 'High voltage present during heat' } as AmpError);
+AmpErrors.set(50, { descr: 'Offline.' } as AmpError);
+AmpErrors.set(51, { descr: 'Time out.' } as AmpError);
+AmpErrors.set(52, { descr: 'Unknown request.' } as AmpError);
+AmpErrors.set(53, { descr: 'Error writing params.' } as AmpError);
+AmpErrors.set(55, { descr: 'Working point canot be set in auto mode.' } as AmpError);
+AmpErrors.set(56, { descr: 'Global request return different values from cards.' } as AmpError);
+AmpErrors.set(57, { descr: 'Busy.' } as AmpError);
 
 export interface AmpStep {
     label: string;
     isError?: boolean;
 }
 
-export const AmpSteps = {
-    0: {
-        label: 'Stand-by',
-    },
-    1: {
-        label: 'Pre-stand-by',
-    },
-    2: {
-        label: 'Discharge',
-    },
-    3: {
-        label: 'Heating',
-    },
-    4: {
-        label: 'Starting High Voltage',
-    },
-    5: {
-        label: 'Regulating',
-    },
-    6: {
-        label: 'Normal Function',
-    },
-    7: {
-        label: 'Error',
-        isError: true,
-    },
-    10: {
-        label: 'Regulating driver',
-    },
-    11: {
-        label: 'Starting finales',
-    },
-    12: {
-        label: 'Regulating finales',
-    },
-    13: {
-        label: 'Normal Function',
-    },
-    14: {
-        label: 'Error',
-        isError: true,
-    },
-} as { [key: number]: AmpStep };
+export const AmpSteps = new Map<number, AmpStep>();
+AmpSteps.set(0, { label: 'Stand-by' } as AmpStep);
+AmpSteps.set(1, { label: 'Pre-stand-by' } as AmpStep);
+AmpSteps.set(2, { label: 'Discharge' } as AmpStep);
+AmpSteps.set(3, { label: 'Heating' } as AmpStep);
+AmpSteps.set(4, { label: 'Starting High Voltage' } as AmpStep);
+AmpSteps.set(5, { label: 'Regulating' } as AmpStep);
+AmpSteps.set(6, { label: 'Normal Function' } as AmpStep);
+AmpSteps.set(7, { label: 'Error', isError: true } as AmpStep);
+AmpSteps.set(10, { label: 'Regulating driver' } as AmpStep);
+AmpSteps.set(11, { label: 'Starting finales' } as AmpStep);
+AmpSteps.set(12, { label: 'Regulating finales' } as AmpStep);
+AmpSteps.set(13, { label: 'Normal Function' } as AmpStep);
+AmpSteps.set(14, { label: 'Error', isError: true } as AmpStep);
 
 // REQUEST params
 export const AmpRequest = {
@@ -378,7 +302,7 @@ export const AmpRequest = {
     driverRegulationD: 234,
     startD: 235,
     regulationD: 236,
-} as { [kex: string]: number };
+} as { [key: string]: number };
 
 export const AmpParamsFlags = {
     workingPointAuto: 0x1,
