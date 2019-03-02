@@ -42,9 +42,9 @@ export interface IFieldInfo {
     type: string;
     name: string;
     title?: string;
-    fields?: IFieldInfo[];
+    fields?: Array<IFieldInfo>;
     slider?: ISliderInfo;
-    toggles?: IToggleInfo[];
+    toggles?: Array<IToggleInfo>;
     index?: number;
 }
 
@@ -66,6 +66,24 @@ export interface IStepInfo {
     isError?: boolean;
 }
 
+export interface IAmpInfoPicture {
+    description?: string;
+    path: string;
+    width?: string;
+}
+
+export interface IAmpInfoSchematic {
+    description?: string;
+    path: string;
+    width?: string;
+}
+
+export interface IAmpInfoMeasure {
+    description?: string;
+    path: string;
+    width?: string;
+}
+
 export interface IAmpInfo {
     name?: string;
     id: number;
@@ -75,8 +93,8 @@ export interface IAmpInfo {
     bandwidth?: string;
     amplificationfactor?: number;
     inverter?: boolean;
-    tubes?: ITubeinfo[];
-    errors?: { [id: number]: IAmpError };
+    tubes?: Array<ITubeinfo>;
+    errors?: Map<number, IAmpError>;
     url?: string;
     valueFactor?: number;
     valueOffset?: number;
@@ -85,15 +103,15 @@ export interface IAmpInfo {
     refOffset?: number;
     data?: IAmpDataHeader;
     port?: string;
-    outputLimits?: number[];
-    dataInfos?: IFieldInfo[];
+    outputLimits?: Array<number>;
+    dataInfos?: Array<IFieldInfo>;
     modulationInfos?: IModulationInfo;
-    steps?: { [id: number]: IStepInfo };
+    steps?: Map<number, IStepInfo>;
     visible?: boolean;
     status?: IAmpStatus;
     host?: string;
-    controlsInfos?: IFieldInfo[];
-    paramsInfos?: IFieldInfo[];
+    controlsInfos?: Array<IFieldInfo>;
+    paramsInfos?: Array<IFieldInfo>;
     paramsPanelTitle?: string;
     master?: number;
     inherits?: number;
@@ -101,6 +119,12 @@ export interface IAmpInfo {
     isMaster?: boolean;
     order?: number;
     modFactor?: number;
+    picturesPath?: string;
+    pictures?: Array<IAmpInfoPicture>;
+    schematicsPath?: string;
+    schematics?: Array<IAmpInfoSchematic>;
+    measuresPath?: string;
+    measures?: Array<IAmpInfoMeasure>;
 }
 
 export interface IAmpResponse {
@@ -181,128 +205,127 @@ AmpSteps.set(13, { label: 'Normal Function' } as AmpStep);
 AmpSteps.set(14, { label: 'Error', isError: true } as AmpStep);
 
 // REQUEST params
-export const AmpRequest = {
-    reset: 70,
-    stop: 71,
-    writeParams: 80,
-    resetParams: 81,
-    resetModulation: 90,
-    getData: 100,
-    params: 110,
-    getParams: 111,
-    workingPoint: 112,
-    tempMeasureInterval: 114,
-    dischargeMaxTime: 115,
-    heatMaxTime: 116,
-    highVoltageMaxTime: 117,
-    regulationMaxTime: 118,
-    outOfRangeMaxTime: 119,
-    errorMaxTime: 120,
-    regulatedMinTime: 121,
-    highVoltageErrorMaxTime: 122,
-    emergencyStopDelay: 123,
-    startP: 124,
-    startMasterP: 124,
-    startI: 125,
-    startMasterI: 125,
-    startSlaveP: 126,
-    startSlaveI: 127,
-    regulationP: 128,
-    regulationMasterP: 128,
-    regulationI: 129,
-    regulationMasterI: 129,
-    regulationSlaveP: 130,
-    regulationSlaveI: 131,
-    functionP: 132,
-    functionMasterP: 132,
-    functionI: 133,
-    functionMasterI: 133,
-    functionSlaveP: 134,
-    functionSlaveI: 135,
-    regulationTreshold: 137,
-    startingTreshold: 138,
-    functionTreshold: 139,
-    measureAverageRatio: 140,
-    modulationPeakAverageRatio: 141,
-    modulationPeakReductionFactor: 142,
-    modulationDetectedMinTime: 143,
-    startWorkingPoint: 144,
-    minPoint: 145,
-    maxPoint: 146,
-    tempAirMax: 147,
-    tempRegulatorMax: 148,
-    tempAverageRatio: 149,
-    tempAirOffset: 150,
-    tempAirFactor: 151,
-    tempRegulatorOffset: 152,
-    tempRegulatorFactor: 153,
-    modulationLimit25: 154,
-    modulationLimit50: 155,
-    modulationLimit75: 156,
-    modulationLimit100: 157,
-    modulationCompensationFactor: 158,
-    minWorkingPoint: 159,
-    maxWorkingPoint: 160,
-    modulationPeakReductionTime: 162,
-    buttonPressedStandByTime: 163,
-    buttonPressedMinTime: 164,
-    buttonPressedModeTime: 165,
-    buttonPressedMaxTime: 166, // Deprecated
-    indicatorDetectModeMaxTime: 167,
-    indicatorDisplayModeMaxTime: 168,
-    indicatorMeasureFactor: 169,
-    indicatorPercentFactor: 170,
-    preStandByMaxTime: 171,
-    dischargeMinTime: 172,
-    autoWriteEepromDelay: 173,
-    phaseDetectionErrorMaxTime: 174,
-    buttonPressedResetTime: 175,
-    phaseDetectionErrorMaxCount: 177,
-    driverWorkingPoint: 178,
-    indicatorDampingFactor: 179,
-    heatMinTime: 180,
-    paramsFlags: 199,
-    controlsFlags: 201,
-    driverMeasureAverageRatio: 140,
-    finaleMeasureAverageRatio: 210,
-    driverMinPoint: 145,
-    finaleMinPoint: 211,
-    driverMaxPoint: 146,
-    finaleMaxPoint: 212,
+export const AmpRequest = new Map<string, number>();
+AmpRequest.set('reset', 70);
+AmpRequest.set('stop', 71);
+AmpRequest.set('writeParams', 80);
+AmpRequest.set('resetParams', 81);
+AmpRequest.set('resetModulation', 90);
+AmpRequest.set('getData', 100);
+AmpRequest.set('params', 110);
+AmpRequest.set('getParams', 111);
+AmpRequest.set('workingPoint', 112);
+AmpRequest.set('tempMeasureInterval', 114);
+AmpRequest.set('dischargeMaxTime', 115);
+AmpRequest.set('heatMaxTime', 116);
+AmpRequest.set('highVoltageMaxTime', 117);
+AmpRequest.set('regulationMaxTime', 118);
+AmpRequest.set('outOfRangeMaxTime', 119);
+AmpRequest.set('errorMaxTime', 120);
+AmpRequest.set('regulatedMinTime', 121);
+AmpRequest.set('highVoltageErrorMaxTime', 122);
+AmpRequest.set('emergencyStopDelay', 123);
+AmpRequest.set('startP', 124);
+AmpRequest.set('startMasterP', 124);
+AmpRequest.set('startI', 125);
+AmpRequest.set('startMasterI', 125);
+AmpRequest.set('startSlaveP', 126);
+AmpRequest.set('startSlaveI', 127);
+AmpRequest.set('regulationP', 128);
+AmpRequest.set('regulationMasterP', 128);
+AmpRequest.set('regulationI', 129);
+AmpRequest.set('regulationMasterI', 129);
+AmpRequest.set('regulationSlaveP', 130);
+AmpRequest.set('regulationSlaveI', 131);
+AmpRequest.set('functionP', 132);
+AmpRequest.set('functionMasterP', 132);
+AmpRequest.set('functionI', 133);
+AmpRequest.set('functionMasterI', 133);
+AmpRequest.set('functionSlaveP', 134);
+AmpRequest.set('functionSlaveI', 135);
+AmpRequest.set('regulationTreshold', 137);
+AmpRequest.set('startingTreshold', 138);
+AmpRequest.set('functionTreshold', 139);
+AmpRequest.set('measureAverageRatio', 140);
+AmpRequest.set('modulationPeakAverageRatio', 141);
+AmpRequest.set('modulationPeakReductionFactor', 142);
+AmpRequest.set('modulationDetectedMinTime', 143);
+AmpRequest.set('startWorkingPoint', 144);
+AmpRequest.set('minPoint', 145);
+AmpRequest.set('maxPoint', 146);
+AmpRequest.set('tempAirMax', 147);
+AmpRequest.set('tempRegulatorMax', 148);
+AmpRequest.set('tempAverageRatio', 149);
+AmpRequest.set('tempAirOffset', 150);
+AmpRequest.set('tempAirFactor', 151);
+AmpRequest.set('tempRegulatorOffset', 152);
+AmpRequest.set('tempRegulatorFactor', 153);
+AmpRequest.set('modulationLimit25', 154);
+AmpRequest.set('modulationLimit50', 155);
+AmpRequest.set('modulationLimit75', 156);
+AmpRequest.set('modulationLimit100', 157);
+AmpRequest.set('modulationCompensationFactor', 158);
+AmpRequest.set('minWorkingPoint', 159);
+AmpRequest.set('maxWorkingPoint', 160);
+AmpRequest.set('modulationPeakReductionTime', 162);
+AmpRequest.set('buttonPressedStandByTime', 163);
+AmpRequest.set('buttonPressedMinTime', 164);
+AmpRequest.set('buttonPressedModeTime', 165);
+AmpRequest.set('buttonPressedMaxTime', 166); // Deprecated
+AmpRequest.set('indicatorDetectModeMaxTime', 167);
+AmpRequest.set('indicatorDisplayModeMaxTime', 168);
+AmpRequest.set('indicatorMeasureFactor', 169);
+AmpRequest.set('indicatorPercentFactor', 170);
+AmpRequest.set('preStandByMaxTime', 171);
+AmpRequest.set('dischargeMinTime', 172);
+AmpRequest.set('autoWriteEepromDelay', 173);
+AmpRequest.set('phaseDetectionErrorMaxTime', 174);
+AmpRequest.set('buttonPressedResetTime', 175);
+AmpRequest.set('phaseDetectionErrorMaxCount', 177);
+AmpRequest.set('driverWorkingPoint', 178);
+AmpRequest.set('indicatorDampingFactor', 179);
+AmpRequest.set('heatMinTime', 180);
+AmpRequest.set('paramsFlags', 199);
+AmpRequest.set('controlsFlags', 201);
+AmpRequest.set('driverMeasureAverageRatio', 140);
+AmpRequest.set('finaleMeasureAverageRatio', 210);
+AmpRequest.set('driverMinPoint', 145);
+AmpRequest.set('finaleMinPoint', 211);
+AmpRequest.set('driverMaxPoint', 146);
+AmpRequest.set('finaleMaxPoint', 212);
     // Already defined -> driverWorkingPoint: workingPoint,
-    finaleWorkingPoint: 213,
-    driverStartingTreshold: 138,
-    finaleStartingTreshold: 214,
-    driverFunctionTreshold: 139,
-    finaleFunctionTreshold: 215,
-    driverRegulationMaxTime: 118,
-    finaleRegulationMaxTime: 216,
-    driverRegulatedMinTime: 121,
-    finaleRegulatedMinTime: 217,
-    finaleStartP: 218,
-    finaleStartI: 219,
-    finaleStartD: 220,
-    finaleRegulationP: 221,
-    finaleRegulationI: 222,
-    finaleRegulationD: 223,
-    finaleFunctionP: 224,
-    finaleFunctionI: 225,
-    driverRegulationP: 226,
-    driverRegulationI: 227,
-    driverFunctionP: 228,
-    driverFunctionI: 229,
-    driverRegulationTreshold: 137,
-    finaleRegulationTreshold: 230,
-    driverStartWorkingPoint: 144,
-    driverStartWorkingPoint1: 144,
-    driverStartWorkingPoint2: 231,
-    finaleStartWorkingPoint: 232,
-    driverOutOfRangeMaxTime: 119,
-    finaleOutOfRangeMaxTime: 233,
-    driverRegulationD: 234,
-    startD: 235,
-    regulationD: 236,
-} as { [key: string]: number };
+AmpRequest.set('finaleWorkingPoint', 213);
+AmpRequest.set('driverStartingTreshold', 138);
+AmpRequest.set('finaleStartingTreshold', 214);
+AmpRequest.set('driverFunctionTreshold', 139);
+AmpRequest.set('finaleFunctionTreshold', 215);
+AmpRequest.set('driverRegulationMaxTime', 118);
+AmpRequest.set('finaleRegulationMaxTime', 216);
+AmpRequest.set('driverRegulatedMinTime', 121);
+AmpRequest.set('finaleRegulatedMinTime', 217);
+AmpRequest.set('finaleStartP', 218);
+AmpRequest.set('finaleStartI', 219);
+AmpRequest.set('finaleStartD', 220);
+AmpRequest.set('finaleRegulationP', 221);
+AmpRequest.set('finaleRegulationI', 222);
+AmpRequest.set('finaleRegulationD', 223);
+AmpRequest.set('finaleFunctionP', 224);
+AmpRequest.set('finaleFunctionI', 225);
+AmpRequest.set('driverRegulationP', 226);
+AmpRequest.set('driverRegulationI', 227);
+AmpRequest.set('driverFunctionP', 228);
+AmpRequest.set('driverFunctionI', 229);
+AmpRequest.set('driverRegulationTreshold', 137);
+AmpRequest.set('finaleRegulationTreshold', 230);
+AmpRequest.set('driverStartWorkingPoint', 144);
+AmpRequest.set('driverStartWorkingPoint1', 144);
+AmpRequest.set('driverStartWorkingPoint2', 231);
+AmpRequest.set('finaleStartWorkingPoint', 232);
+AmpRequest.set('driverOutOfRangeMaxTime', 119);
+AmpRequest.set('finaleOutOfRangeMaxTime', 233);
+AmpRequest.set('driverRegulationD', 234);
+AmpRequest.set('startD', 235);
+AmpRequest.set('regulationD', 236);
 
 export const AmpParamsFlags = {
     workingPointAuto: 0x1,
