@@ -94,22 +94,17 @@ export interface IAmpInfo {
     amplificationfactor?: number;
     inverter?: boolean;
     tubes?: Array<ITubeinfo>;
-    errors?: Map<number, IAmpError>;
     url?: string;
     valueFactor?: number;
     valueOffset?: number;
     valueUnit?: string;
     refFactor?: number;
     refOffset?: number;
-    data?: IAmpDataHeader;
-    port?: string;
     outputLimits?: Array<number>;
     dataInfos?: Array<IFieldInfo>;
     modulationInfos?: IModulationInfo;
-    steps?: Map<number, IStepInfo>;
+    steps?: Array<IStepInfo>;
     visible?: boolean;
-    status?: IAmpStatus;
-    host?: string;
     controlsInfos?: Array<IFieldInfo>;
     paramsInfos?: Array<IFieldInfo>;
     paramsPanelTitle?: string;
@@ -125,6 +120,67 @@ export interface IAmpInfo {
     schematics?: Array<IAmpInfoSchematic>;
     measuresPath?: string;
     measures?: Array<IAmpInfoMeasure>;
+}
+
+export class AmpInfo implements IAmpInfo {
+    private _values: IAmpInfo;
+    private _stepMap: Map<number, IStepInfo>;
+
+    public host: string;
+    public status: IAmpStatus;
+    public port: string;
+    public datas: IAmpDataHeader;
+
+    constructor(values: IAmpInfo) {
+        this._values = values;
+    }
+
+    public get name() { return this._values.name; }
+    public get id() { return this._values.id; }
+    public get description() { return this._values.description; }
+    public get dampingfactor() { return this._values.dampingfactor; }
+    public get power() { return this._values.power; }
+    public get bandwidth() { return this._values.bandwidth; }
+    public get amplificationfactor() { return this._values.amplificationfactor; }
+    public get inverter() { return this._values.inverter; }
+    public get tubes() { return this._values.tubes; }
+    public get url() { return this._values.url; }
+    public get valueFactor() { return this._values.valueFactor; }
+    public get valueOffset() { return this._values.valueOffset; }
+    public get valueUnit() { return this._values.valueUnit; }
+    public get refFactor() { return this._values.refFactor; }
+    public get refOffset() { return this._values.refOffset; }
+    public get outputLimits() { return this._values.outputLimits; }
+    public get dataInfos() { return this._values.dataInfos; }
+    public get modulationInfos() { return this._values.modulationInfos; }
+    public get visible() { return this._values.visible; }
+    public get controlsInfos() { return this._values.controlsInfos; }
+    public get paramsInfos() { return this._values.paramsInfos; }
+    public get paramsPanelTitle() { return this._values.paramsPanelTitle; }
+    public get master() { return this._values.master; }
+    public get inherits() { return this._values.inherits; }
+    public get baseSection() { return this._values.baseSection; }
+    public get isMaster() { return this._values.isMaster; }
+    public get order() { return this._values.order; }
+    public get modFactor() { return this._values.modFactor; }
+    public get picturesPath() { return this._values.picturesPath; }
+    public get pictures() { return this._values.pictures; }
+    public get schematicsPath() { return this._values.schematicsPath; }
+    public get schematics() { return this._values.schematics; }
+    public get measuresPath() { return this._values.measuresPath; }
+    public get measures() { return this._values.measures; }
+
+    public get stepMap() {
+        if (this._stepMap) {
+            return this._stepMap;
+        }
+
+        if (!this._values.steps) {
+            return this._stepMap = new Map<number, IStepInfo>();
+        }
+
+        return this._stepMap = this._values.steps.reduce((m, step, index) => m.set(index, step), new Map<number, IStepInfo>());
+    }
 }
 
 export interface IAmpResponse {
@@ -293,7 +349,7 @@ AmpRequest.set('driverMinPoint', 145);
 AmpRequest.set('finaleMinPoint', 211);
 AmpRequest.set('driverMaxPoint', 146);
 AmpRequest.set('finaleMaxPoint', 212);
-    // Already defined -> driverWorkingPoint: workingPoint,
+// Already defined -> driverWorkingPoint: workingPoint,
 AmpRequest.set('finaleWorkingPoint', 213);
 AmpRequest.set('driverStartingTreshold', 138);
 AmpRequest.set('finaleStartingTreshold', 214);
