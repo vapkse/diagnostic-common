@@ -4,7 +4,7 @@ export interface IArtistImage {
 }
 
 export interface IArtistSimilar {
-    artist?: IArtistBase[];
+    artist?: Array<IArtistBase>;
 }
 
 export interface IArtistStats {
@@ -15,11 +15,11 @@ export interface IArtistStats {
 export interface IArtistBase {
     name: string;
     url: string;
-    image: IArtistImage[];
+    image: Array<IArtistImage>;
 }
 
 export interface IArtistTags {
-    tag?: IArtistTag[];
+    tag?: Array<IArtistTag>;
 }
 
 export interface IArtistTag {
@@ -57,5 +57,5 @@ export interface IArtistInfos extends IArtistBase {
 export interface INowPlaying {
     artists?: string;
     album?: string;
-    artistInfos?: IArtistInfos[];
+    artistInfos?: Array<IArtistInfos>;
 }

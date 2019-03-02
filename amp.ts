@@ -42,9 +42,9 @@ export interface IFieldInfo {
     type: string;
     name: string;
     title?: string;
-    fields?: IFieldInfo[];
+    fields?: Array<IFieldInfo>;
     slider?: ISliderInfo;
-    toggles?: IToggleInfo[];
+    toggles?: Array<IToggleInfo>;
     index?: number;
 }
 
@@ -75,7 +75,7 @@ export interface IAmpInfo {
     bandwidth?: string;
     amplificationfactor?: number;
     inverter?: boolean;
-    tubes?: ITubeinfo[];
+    tubes?: Array<ITubeinfo>;
     errors?: { [id: number]: IAmpError };
     url?: string;
     valueFactor?: number;
@@ -85,15 +85,15 @@ export interface IAmpInfo {
     refOffset?: number;
     data?: IAmpDataHeader;
     port?: string;
-    outputLimits?: number[];
-    dataInfos?: IFieldInfo[];
+    outputLimits?: Array<number>;
+    dataInfos?: Array<IFieldInfo>;
     modulationInfos?: IModulationInfo;
     steps?: { [id: number]: IStepInfo };
     visible?: boolean;
     status?: IAmpStatus;
     host?: string;
-    controlsInfos?: IFieldInfo[];
-    paramsInfos?: IFieldInfo[];
+    controlsInfos?: Array<IFieldInfo>;
+    paramsInfos?: Array<IFieldInfo>;
     paramsPanelTitle?: string;
     master?: number;
     inherits?: number;
