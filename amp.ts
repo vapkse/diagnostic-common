@@ -120,11 +120,13 @@ export interface IAmpInfo {
     schematics?: Array<IAmpInfoSchematic>;
     measuresPath?: string;
     measures?: Array<IAmpInfoMeasure>;
+    controlsPanel?: Array<'reset|resetModulation|stop'>;
 }
 
 export class AmpInfo implements IAmpInfo {
     private _values: IAmpInfo;
     private _stepMap: Map<number, IStepInfo>;
+    private _controlsSet: Set<'reset|resetModulation|stop'>;
 
     public host: string;
     public status: IAmpStatus;
@@ -154,7 +156,6 @@ export class AmpInfo implements IAmpInfo {
     public get dataInfos() { return this._values.dataInfos; }
     public get modulationInfos() { return this._values.modulationInfos; }
     public get visible() { return this._values.visible; }
-    public get controlsInfos() { return this._values.controlsInfos; }
     public get paramsInfos() { return this._values.paramsInfos; }
     public get paramsPanelTitle() { return this._values.paramsPanelTitle; }
     public get master() { return this._values.master; }
@@ -168,6 +169,7 @@ export class AmpInfo implements IAmpInfo {
     public get schematics() { return this._values.schematics; }
     public get measuresPath() { return this._values.measuresPath; }
     public get measures() { return this._values.measures; }
+    public get controlsPanel() { return this._values.controlsPanel; }
 
     public get isMaster() { return this._values.isMaster; }
     public set isMaster(value: boolean) { this._values.isMaster = value; }
@@ -196,6 +198,20 @@ export class AmpInfo implements IAmpInfo {
         });
 
         return this._stepMap;
+    }
+
+    public get controlsSet() {
+        if (this._controlsSet) {
+            return this._controlsSet;
+        }
+
+        this._controlsSet = new Set<'reset|resetModulation|stop'>();
+
+        if (this._values.controlsPanel) {
+            this._controlsSet = this._values.controlsPanel.reduce((s, control) => s.add(control), this._controlsSet);
+        }
+
+        return this._controlsSet;
     }
 
     public merge(baseInfos: AmpInfo) {
