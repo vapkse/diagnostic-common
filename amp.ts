@@ -160,7 +160,6 @@ export class AmpInfo implements IAmpInfo {
     public get master() { return this._values.master; }
     public get inherits() { return this._values.inherits; }
     public get baseSection() { return this._values.baseSection; }
-    public get isMaster() { return this._values.isMaster; }
     public get order() { return this._values.order; }
     public get modFactor() { return this._values.modFactor; }
     public get picturesPath() { return this._values.picturesPath; }
@@ -170,16 +169,46 @@ export class AmpInfo implements IAmpInfo {
     public get measuresPath() { return this._values.measuresPath; }
     public get measures() { return this._values.measures; }
 
+    public get isMaster() { return this._values.isMaster; }
+    public set isMaster(value: boolean) { this._values.isMaster = value; }
+
     public get stepMap() {
         if (this._stepMap) {
             return this._stepMap;
         }
 
         if (!this._values.steps) {
-            return this._stepMap = new Map<number, IStepInfo>();
+            this._stepMap = new Map<number, IStepInfo>();
+        } else {
+            this._stepMap = this._values.steps.reduce((m, step, index) => m.set(index, step || {} as IStepInfo), new Map<number, IStepInfo>());
         }
 
-        return this._stepMap = this._values.steps.reduce((m, step, index) => m.set(index, step), new Map<number, IStepInfo>());
+        // Merge steps with default
+        this._stepMap.forEach((step: any, key) => {
+            const defaultStep = AmpSteps.get(key) as any;
+            if (defaultStep) {
+                Object.keys(defaultStep).forEach(k => {
+                    if (step[k] === undefined) {
+                        step[k] = defaultStep[k];
+                    }
+                });
+            }
+        });
+
+        return this._stepMap;
+    }
+
+    public merge(baseInfos: AmpInfo) {
+        const val = this._values as any;
+        const base = baseInfos._values as any;
+
+        Object.keys(base).forEach(key => {
+            if (val[key] === undefined) {
+                val[key] = base[key];
+            }
+        });
+
+        this._stepMap = undefined;
     }
 }
 
