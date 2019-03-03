@@ -292,13 +292,13 @@ export interface IAmpInfo {
     schematics?: Array<IAmpInfoSchematic>;
     measuresPath?: string;
     measures?: Array<IAmpInfoMeasure>;
-    controlsPanel?: Array<'reset|resetModulation|stop'>;
+    controlsPanel?: Array<'reset' | 'resetModulation' | 'stop'>;
 }
 
 export class AmpInfo implements IAmpInfo {
     private _values: IAmpInfo;
     private _stepMap: Map<number, IStepInfo>;
-    private _controlsSet: Set<'reset|resetModulation|stop'>;
+    private _controlsSet: Set<'reset' | 'resetModulation' | 'stop'>;
 
     public host: string;
     public status: IAmpStatus;
@@ -377,7 +377,7 @@ export class AmpInfo implements IAmpInfo {
             return this._controlsSet;
         }
 
-        this._controlsSet = new Set<'reset|resetModulation|stop'>();
+        this._controlsSet = new Set<'reset' | 'resetModulation' | 'stop'>();
 
         if (this._values.controlsPanel) {
             this._controlsSet = this._values.controlsPanel.reduce((s, control) => s.add(control), this._controlsSet);
