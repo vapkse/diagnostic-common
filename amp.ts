@@ -426,6 +426,7 @@ export interface IAmpStatus {
     statusText: string;
     lastseen: number;
     interval?: string;
+    flags?: boolean; // Indicate if working point is manual or differential feedback is off
 }
 
 export const AmpParamsFlags = {
