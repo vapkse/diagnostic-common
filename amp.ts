@@ -179,6 +179,9 @@ export interface ITubeinfo {
     valueUnit?: string;
     refFactor?: number;
     refOffset?: number;
+    min?: number;
+    max?: number;
+    ref?: number;
 }
 
 export interface IModulationInfo {
@@ -361,11 +364,9 @@ export class AmpInfo implements IAmpInfo {
         this._stepMap.forEach((step: any, key) => {
             const defaultStep = AmpSteps.get(key) as any;
             if (defaultStep) {
-                Object.keys(defaultStep).forEach(k => {
-                    if (step[k] === undefined) {
-                        step[k] = defaultStep[k];
-                    }
-                });
+                Object.keys(defaultStep)
+                    .filter(k => step[k] === undefined)
+                    .forEach(k => step[k] = defaultStep[k]);
             }
         });
 
@@ -390,11 +391,9 @@ export class AmpInfo implements IAmpInfo {
         const val = this._values as any;
         const base = baseInfos._values as any;
 
-        Object.keys(base).forEach(key => {
-            if (val[key] === undefined) {
-                val[key] = base[key];
-            }
-        });
+        Object.keys(base)
+            .filter(key => val[key] === undefined)
+            .forEach(key => val[key] = base[key]);
 
         this._stepMap = undefined;
     }
@@ -419,6 +418,13 @@ export interface IAmpDataHeader extends IAmpResponse {
     stepvmax: number;
     stepval: number;
     tick: number;
+    ctrlflags?: number;
+    temp?: number;
+    val?: number[];
+    out?: number[];
+    min?: number | number[];
+    max?: number | number[];
+    ref?: number | number[];
 }
 
 export interface IAmpStatus {
