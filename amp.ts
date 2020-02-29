@@ -1,5 +1,7 @@
 export const serialBufferMaxLength = 64;
 
+export type DataHeaderKeys = 'id' | 'msg' | 'errorNumber' | 'extraValue' | 'step' | 'steptmax' | 'steptelaps' | 'stepvmax' | 'stepval' | 'tick';
+
 export interface AmpStep {
     label: string;
     isError?: boolean;
@@ -418,6 +420,7 @@ export interface IAmpDataHeader extends IAmpResponse {
     stepvmax: number;
     stepval: number;
     tick: number;
+    // Client fields
     ctrlflags?: number;
     temp?: number;
     val?: number[];
