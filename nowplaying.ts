@@ -1,61 +1,61 @@
-export interface IArtistImage {
+export interface ArtistImage {
     '#text': string;
     size: string;
 }
 
-export interface IArtistSimilar {
-    artist?: Array<IArtistBase>;
+export interface ArtistSimilar {
+    artist?: Array<ArtistBase>;
 }
 
-export interface IArtistStats {
+export interface ArtistStats {
     listeners?: number;
     playcount?: number;
 }
 
-export interface IArtistBase {
+export interface ArtistBase {
     name: string;
     url: string;
-    image: Array<IArtistImage>;
+    image: Array<ArtistImage>;
 }
 
-export interface IArtistTags {
-    tag?: Array<IArtistTag>;
+export interface ArtistTags {
+    tag?: Array<ArtistTag>;
 }
 
-export interface IArtistTag {
+export interface ArtistTag {
     name: string;
     url: string;
 }
 
-export interface IArtistLinks {
-    link?: IArtistLink;
+export interface ArtistLinks {
+    link?: ArtistLink;
 }
 
-export interface IArtistLink {
+export interface ArtistLink {
     '#text': string;
     href: string;
     rel: string;
 }
 
-export interface IArtistBio {
+export interface ArtistBio {
     content?: string;
     published?: string;
     summary?: string;
-    links?: IArtistLinks;
+    links?: ArtistLinks;
 }
 
-export interface IArtistInfos extends IArtistBase {
+export interface ArtistInfos extends ArtistBase {
     mbid: string;
     streamable: string;
-    stats: IArtistStats;
-    similar: IArtistSimilar;
-    tags: IArtistTags;
-    bio: IArtistBio;
+    stats: ArtistStats;
+    similar: ArtistSimilar;
+    tags: ArtistTags;
+    bio: ArtistBio;
     ontour: string;
 }
 
-export interface INowPlaying {
+export interface NowPlaying {
     artists?: string;
     album?: string;
-    artistInfos?: Array<IArtistInfos>;
+    artistInfos?: Array<ArtistInfos>;
 }

@@ -1,4 +1,4 @@
-export interface IValidationMessage extends Error {
+export interface ValidationMessage extends Error {
     message: string;
     name: string;
     type?: string;

@@ -3,6 +3,7 @@ export const serialBufferMaxLength = 64;
 export type DataHeaderKeys = 'id' | 'msg' | 'errorNumber' | 'extraValue' | 'step' | 'steptmax' | 'steptelaps' | 'stepvmax' | 'stepval' | 'tick';
 
 export interface AmpStep {
+    [key: string]: any;
     label: string;
     isError?: boolean;
 }
@@ -174,7 +175,7 @@ AmpErrors.set(55, { descr: 'Working point canot be set in auto mode.' } as AmpEr
 AmpErrors.set(56, { descr: 'Global request return different values from cards.' } as AmpError);
 AmpErrors.set(57, { descr: 'Busy.' } as AmpError);
 
-export interface ITubeinfo {
+export interface Tubeinfo {
     name: string;
     valueFactor?: number;
     valueOffset?: number;
@@ -186,23 +187,23 @@ export interface ITubeinfo {
     ref?: number;
 }
 
-export interface IModulationInfo {
+export interface ModulationInfo {
     dataValueName: string;
     dataValueIndex: number;
     factor?: number;
 }
 
-export interface IToggleInfo {
+export interface ToggleInfo {
     flag: number;
     flagName: string;
     title: string;
 }
 
-export interface IToggle extends IToggleInfo {
+export interface Toggle extends ToggleInfo {
     name: string;
 }
 
-export interface ISliderInfo {
+export interface SliderInfo {
     title: string;
     min?: number;
     max?: number;
@@ -210,58 +211,59 @@ export interface ISliderInfo {
     factor?: number;
 }
 
-export interface ISlider extends ISliderInfo {
+export interface Slider extends SliderInfo {
     name: string;
     enabled?: boolean;
 }
 
-export interface IFieldInfo {
+export interface FieldInfo {
     type: string;
     name: string;
     title?: string;
-    fields?: Array<IFieldInfo>;
-    slider?: ISliderInfo;
-    toggles?: Array<IToggleInfo>;
+    fields?: Array<FieldInfo>;
+    slider?: SliderInfo;
+    toggles?: Array<ToggleInfo>;
     index?: number;
 }
 
-export interface ITempSensorInfo {
+export interface TempSensorInfo {
     name: string;
     offset?: number;
     factor?: number;
     index?: number;
 }
 
-export interface IAmpError {
+export interface AmpError {
     descr: string;
 }
 
-export interface IStepInfo {
+export interface StepInfo {
+    [key: string]: any;
     label: string;
     labelColor?: string;
     range: number;
     isError?: boolean;
 }
 
-export interface IAmpInfoPicture {
+export interface AmpInfoPicture {
     description?: string;
     path: string;
     width?: string;
 }
 
-export interface IAmpInfoSchematic {
+export interface AmpInfoSchematic {
     description?: string;
     path: string;
     width?: string;
 }
 
-export interface IAmpInfoMeasure {
+export interface AmpInfoMeasure {
     description?: string;
     path: string;
     width?: string;
 }
 
-export interface IAmpInfo {
+export interface AmpInfoInterface {
     name?: string;
     id: number;
     description?: string;
@@ -270,7 +272,7 @@ export interface IAmpInfo {
     bandwidth?: string;
     amplificationfactor?: number;
     inverter?: boolean;
-    tubes?: Array<ITubeinfo>;
+    tubes?: Array<Tubeinfo>;
     url?: string;
     valueFactor?: number;
     valueOffset?: number;
@@ -278,12 +280,12 @@ export interface IAmpInfo {
     refFactor?: number;
     refOffset?: number;
     outputLimits?: Array<number>;
-    dataInfos?: Array<IFieldInfo>;
-    modulationInfos?: IModulationInfo;
-    steps?: Array<IStepInfo>;
+    dataInfos?: Array<FieldInfo>;
+    modulationInfos?: ModulationInfo;
+    steps?: Array<StepInfo>;
     visible?: boolean;
-    controlsInfos?: Array<IFieldInfo>;
-    paramsInfos?: Array<IFieldInfo>;
+    controlsInfos?: Array<FieldInfo>;
+    paramsInfos?: Array<FieldInfo>;
     paramsPanelTitle?: string;
     master?: number;
     inherits?: number;
@@ -292,64 +294,167 @@ export interface IAmpInfo {
     order?: number;
     modFactor?: number;
     picturesPath?: string;
-    pictures?: Array<IAmpInfoPicture>;
+    pictures?: Array<AmpInfoPicture>;
     schematicsPath?: string;
-    schematics?: Array<IAmpInfoSchematic>;
+    schematics?: Array<AmpInfoSchematic>;
     measuresPath?: string;
-    measures?: Array<IAmpInfoMeasure>;
+    measures?: Array<AmpInfoMeasure>;
     controlsPanel?: Array<'reset' | 'resetModulation' | 'stop'>;
 }
 
-export class AmpInfo implements IAmpInfo {
-    private _values: IAmpInfo;
-    private _stepMap: Map<number, IStepInfo>;
+export class AmpInfo implements AmpInfoInterface {
+    public host: string;
+    public status: AmpStatus;
+    public port: string;
+    public datas: AmpDataHeader;
+
+    private _values: AmpInfoInterface;
+    private _stepMap: Map<number, StepInfo>;
     private _controlsSet: Set<'reset' | 'resetModulation' | 'stop'>;
 
-    public host: string;
-    public status: IAmpStatus;
-    public port: string;
-    public datas: IAmpDataHeader;
-
-    constructor(values: IAmpInfo) {
+    public constructor(values: AmpInfoInterface) {
         this._values = values;
     }
 
-    public get name() { return this._values.name; }
-    public get id() { return this._values.id; }
-    public get description() { return this._values.description; }
-    public get dampingfactor() { return this._values.dampingfactor; }
-    public get power() { return this._values.power; }
-    public get bandwidth() { return this._values.bandwidth; }
-    public get amplificationfactor() { return this._values.amplificationfactor; }
-    public get inverter() { return this._values.inverter; }
-    public get tubes() { return this._values.tubes; }
-    public get url() { return this._values.url; }
-    public get valueFactor() { return this._values.valueFactor; }
-    public get valueOffset() { return this._values.valueOffset; }
-    public get valueUnit() { return this._values.valueUnit; }
-    public get refFactor() { return this._values.refFactor; }
-    public get refOffset() { return this._values.refOffset; }
-    public get outputLimits() { return this._values.outputLimits; }
-    public get dataInfos() { return this._values.dataInfos; }
-    public get modulationInfos() { return this._values.modulationInfos; }
-    public get visible() { return this._values.visible; }
-    public get paramsInfos() { return this._values.paramsInfos; }
-    public get paramsPanelTitle() { return this._values.paramsPanelTitle; }
-    public get master() { return this._values.master; }
-    public get inherits() { return this._values.inherits; }
-    public get baseSection() { return this._values.baseSection; }
-    public get order() { return this._values.order; }
-    public get modFactor() { return this._values.modFactor; }
-    public get picturesPath() { return this._values.picturesPath; }
-    public get pictures() { return this._values.pictures; }
-    public get schematicsPath() { return this._values.schematicsPath; }
-    public get schematics() { return this._values.schematics; }
-    public get measuresPath() { return this._values.measuresPath; }
-    public get measures() { return this._values.measures; }
-    public get controlsPanel() { return this._values.controlsPanel; }
+    public get name() {
+        return this._values.name;
+    }
 
-    public get isMaster() { return this._values.isMaster; }
-    public set isMaster(value: boolean) { this._values.isMaster = value; }
+    public get id() {
+        return this._values.id;
+    }
+
+    public get description() {
+        return this._values.description;
+    }
+
+    public get dampingfactor() {
+        return this._values.dampingfactor;
+    }
+
+    public get power() {
+        return this._values.power;
+    }
+
+    public get bandwidth() {
+        return this._values.bandwidth;
+    }
+
+    public get amplificationfactor() {
+        return this._values.amplificationfactor;
+    }
+
+    public get inverter() {
+        return this._values.inverter;
+    }
+
+    public get tubes() {
+        return this._values.tubes;
+    }
+
+    public get url() {
+        return this._values.url;
+    }
+
+    public get valueFactor() {
+        return this._values.valueFactor;
+    }
+
+    public get valueOffset() {
+        return this._values.valueOffset;
+    }
+
+    public get valueUnit() {
+        return this._values.valueUnit;
+    }
+
+    public get refFactor() {
+        return this._values.refFactor;
+    }
+
+    public get refOffset() {
+        return this._values.refOffset;
+    }
+
+    public get outputLimits() {
+        return this._values.outputLimits;
+    }
+
+    public get dataInfos() {
+        return this._values.dataInfos;
+    }
+
+    public get modulationInfos() {
+        return this._values.modulationInfos;
+    }
+
+    public get visible() {
+        return this._values.visible;
+    }
+
+    public get paramsInfos() {
+        return this._values.paramsInfos;
+    }
+
+    public get paramsPanelTitle() {
+        return this._values.paramsPanelTitle;
+    }
+
+    public get master() {
+        return this._values.master;
+    }
+
+    public get inherits() {
+        return this._values.inherits;
+    }
+
+    public get baseSection() {
+        return this._values.baseSection;
+    }
+
+    public get order() {
+        return this._values.order;
+    }
+
+    public get modFactor() {
+        return this._values.modFactor;
+    }
+
+    public get picturesPath() {
+        return this._values.picturesPath;
+    }
+
+    public get pictures() {
+        return this._values.pictures;
+    }
+
+    public get schematicsPath() {
+        return this._values.schematicsPath;
+    }
+
+    public get schematics() {
+        return this._values.schematics;
+    }
+
+    public get measuresPath() {
+        return this._values.measuresPath;
+    }
+
+    public get measures() {
+        return this._values.measures;
+    }
+
+    public get controlsPanel() {
+        return this._values.controlsPanel;
+    }
+
+    public get isMaster() {
+        return this._values.isMaster;
+    }
+
+    public set isMaster(value: boolean) {
+        this._values.isMaster = value;
+    }
 
     public get stepMap() {
         if (this._stepMap) {
@@ -357,18 +462,20 @@ export class AmpInfo implements IAmpInfo {
         }
 
         if (!this._values.steps) {
-            this._stepMap = new Map<number, IStepInfo>();
+            this._stepMap = new Map<number, StepInfo>();
         } else {
-            this._stepMap = this._values.steps.reduce((m, step, index) => m.set(index, step || {} as IStepInfo), new Map<number, IStepInfo>());
+            this._stepMap = this._values.steps.reduce((m, step, index) => m.set(index, step || {} as StepInfo), new Map<number, StepInfo>());
         }
 
         // Merge steps with default
-        this._stepMap.forEach((step: any, key) => {
-            const defaultStep = AmpSteps.get(key) as any;
+        this._stepMap.forEach((step, key) => {
+            const defaultStep = AmpSteps.get(key);
             if (defaultStep) {
                 Object.keys(defaultStep)
                     .filter(k => step[k] === undefined)
-                    .forEach(k => step[k] = defaultStep[k]);
+                    .forEach(k => {
+                        step[k] = defaultStep[k];
+                    });
             }
         });
 
@@ -395,25 +502,27 @@ export class AmpInfo implements IAmpInfo {
 
         Object.keys(base)
             .filter(key => val[key] === undefined)
-            .forEach(key => val[key] = base[key]);
+            .forEach(key => {
+                val[key] = base[key];
+            });
 
         this._stepMap = undefined;
     }
 }
 
-export interface IAmpResponse {
+export interface AmpResponse {
     id: number;
     msg: number;
     errorNumber: number;
     extraValue: number;
 }
 
-export interface IAmpDataResponse {
+export interface AmpDataResponse {
     port: string;
-    datas: IAmpDataHeader;
+    datas: AmpDataHeader;
 }
 
-export interface IAmpDataHeader extends IAmpResponse {
+export interface AmpDataHeader extends AmpResponse {
     step: number;
     steptmax: number;
     steptelaps: number;
@@ -430,7 +539,7 @@ export interface IAmpDataHeader extends IAmpResponse {
     ref?: number | number[];
 }
 
-export interface IAmpStatus {
+export interface AmpStatus {
     status: number;
     statusText: string;
     lastseen: number;
@@ -441,10 +550,10 @@ export interface IAmpStatus {
 export const AmpParamsFlags = {
     workingPointAuto: 0x1,
     diffFeedBack: 0x2,
-    default: 0x1,
+    default: 0x1
 };
 
 export const AmpControlsFlags = {
     diffFeedBack: 0x2,
-    default: 0x2,
+    default: 0x2
 };

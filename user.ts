@@ -1,9 +1,9 @@
-export interface IUserEmail {
+export interface UserEmail {
     userName?: string;
     email?: string;
 }
 
-export interface IDbUser extends IUserEmail {
+export interface DbUser extends UserEmail {
     _id: string;
     _password?: string; // For local provider
     displayName?: string;
@@ -18,21 +18,21 @@ export interface IDbUser extends IUserEmail {
     lastIP?: string;
 }
 
-export interface IUser extends IDbUser {
+export interface User extends DbUser {
     token?: string; // For external providers
     photo?: string;
 }
 
-export interface ILoginCredential {
+export interface LoginCredential {
     username: string;
     password: string;
 }
 
-export interface IResetPassword {
+export interface ResetPassword {
     email: string;
 }
 
-export interface ISignupInfos {
+export interface SignupInfos {
     username: string;
     email: string;
     password: string;
