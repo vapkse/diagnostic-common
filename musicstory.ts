@@ -144,4 +144,13 @@ export class MusicStory {
     public artists = new Array<Artist>();
     public album: string | Album;
     public title: string;
+    public hasInfo: boolean;
+    public hasBiography: boolean;
+    public hasGenre: boolean;
+    public hasPicture: boolean;
+    public hasNews: boolean;
+    public hasTimeLine: boolean;
+    public hasAlbum: boolean;
+    public hasWebSite: boolean;
+    public hasMusicBrainz: boolean;
 }
