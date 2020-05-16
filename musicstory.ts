@@ -14,8 +14,6 @@ export interface Artist extends Info {
     country?: string; // Pays
     start_decade?: number; // Décennie de début de carrière
     end_decade?: string; // Décennie de fin de carrière
-    update_date: string; // Date de dernière mise à jour
-    create_date: string; // Date d'entrée en base de données
 
     genres: Array<Genre>;
     biographies: Array<Biography>;
@@ -29,18 +27,16 @@ export interface Artist extends Info {
 
 export interface Info {
     id: number;
+    update_date: string; // Date de dernière mise à jour
+    create_date: string; // Date d'entrée en base de données
 }
 
 export interface MusicBrainz extends Info {
     url: string;
-    update_date: string;
-    creation_date: string;
 }
 
 export interface WebSite extends Info {
     url: string;
-    update_date: string;
-    creation_date: string;
     official: number;
 }
 
@@ -52,8 +48,6 @@ export interface Album extends Info {
     type: string;
     format: string;
     release_date: string;
-    update_date: string;
-    creation_date: string;
     link: string;
 }
 
@@ -67,8 +61,6 @@ export interface TimeLine extends Info {
     licence: string;
     copyright: string;
     source: string;
-    update_date: string;
-    creation_date: string;
     lang: string;
     url: string;
     location: string;
@@ -89,8 +81,6 @@ export interface News extends Info {
     licence: string;
     copyright: string;
     source: string;
-    update_date: string;
-    creation_date: string;
     lang: string;
     url: string;
     location: string;
@@ -111,8 +101,6 @@ export interface Picture extends Info {
     mime_type: string;
     copyright: string;
     licence: string;
-    update_date: string;
-    creation_date: string;
     main: number;
 }
 
@@ -121,8 +109,6 @@ export interface Genre extends Info {
     name: string;
     url: string;
     main: number;
-    update_date: string;
-    creation_date: string;
 }
 
 export interface Biography extends Info {
@@ -135,8 +121,6 @@ export interface Biography extends Info {
     source: string;
     copyright: string;
     licence: string;
-    update_date: string;
-    creation_date: string;
     link: string;
 }
 
