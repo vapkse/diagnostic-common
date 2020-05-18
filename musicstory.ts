@@ -1,3 +1,5 @@
+export type WebLinkType = 'Official' | 'NotOfficial' | 'MusicBrainz';
+
 export interface Artist extends Info {
     [subInfos: string]: any;
     name: string; // Nom complet
@@ -14,21 +16,17 @@ export interface Artist extends Info {
     country?: string; // Pays
     start_decade?: number; // Décennie de début de carrière
     end_decade?: string; // Décennie de fin de carrière
-
-    genres: Array<Genre>;
-    biographies: Array<Biography>;
-    pictures: Array<Picture>;
-    news: Array<News>;
-    timeline: Array<TimeLine>;
-    albums: Array<Album>;
-    websites: Array<WebSite>;
-    musicbrainz: Array<MusicBrainz>;
 }
 
 export interface Info {
     id: number;
     update_date: string; // Date de dernière mise à jour
     create_date: string; // Date d'entrée en base de données
+}
+
+export interface WebLink extends Info {
+    url: string;
+    type: WebLinkType;
 }
 
 export interface MusicBrainz extends Info {
@@ -126,15 +124,6 @@ export interface Biography extends Info {
 
 export class MusicStory {
     public artists = new Array<Artist>();
-    public album: string | Album;
+    public album: string;
     public title: string;
-    public hasInfo: boolean;
-    public hasBiography: boolean;
-    public hasGenre: boolean;
-    public hasPicture: boolean;
-    public hasNews: boolean;
-    public hasTimeLine: boolean;
-    public hasAlbum: boolean;
-    public hasWebSite: boolean;
-    public hasMusicBrainz: boolean;
 }
