@@ -120,6 +120,7 @@ export interface Biography extends Info {
     copyright: string;
     licence: string;
     link: string;
+    url: string;
 }
 
 export class MusicStory {
