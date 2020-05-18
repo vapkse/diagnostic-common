@@ -19,7 +19,7 @@ export interface Artist extends Info {
     biographies: Array<Biography>;
     pictures: Array<Picture>;
     news: Array<News>;
-    timelines: Array<TimeLine>;
+    timeline: Array<TimeLine>;
     albums: Array<Album>;
     websites: Array<WebSite>;
     musicbrainz: Array<MusicBrainz>;
