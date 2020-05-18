@@ -127,4 +127,5 @@ export class MusicStory {
     public artists = new Array<Artist>();
     public album: string;
     public title: string;
+    public query: string;
 }
