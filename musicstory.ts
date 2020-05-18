@@ -129,3 +129,12 @@ export class MusicStory {
     public title: string;
     public query: string;
 }
+
+export interface MusicStoryResponse<T> {
+    version: string;
+    code: number;
+    count: number;
+    pageCount: number;
+    currentPage: number;
+    data: Array<T>;
+}
