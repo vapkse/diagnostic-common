@@ -18,6 +18,10 @@ export interface Artist extends Info {
     end_decade?: string; // Décennie de fin de carrière
 }
 
+export interface Expandable {
+    expanded: boolean;
+}
+
 export interface Info {
     id: number;
     update_date: string; // Date de dernière mise à jour
@@ -69,7 +73,7 @@ export interface TimeLine extends Info {
     link: string;
 }
 
-export interface News extends Info {
+export interface News extends Info, Expandable {
     id_source: number;
     title: string;
     subtitle: string;
