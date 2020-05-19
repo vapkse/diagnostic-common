@@ -1,6 +1,6 @@
 export type WebLinkType = 'Official' | 'NotOfficial' | 'MusicBrainz';
 
-export type Codes = -1 | -2 | -3 | -9;
+export type Codes = 0 | -1 | -2 | -3 | -9;
 
 export interface Artist extends Info {
     [subInfos: string]: any;
