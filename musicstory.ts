@@ -1,5 +1,7 @@
 export type WebLinkType = 'Official' | 'NotOfficial' | 'MusicBrainz';
 
+export type Codes = -1 | -2|-3 | -9;
+
 export interface Artist extends Info {
     [subInfos: string]: any;
     name: string; // Nom complet
@@ -136,7 +138,7 @@ export class MusicStory {
 
 export interface MusicStoryResponse<T> {
     version: string;
-    code: number;
+    code: Codes;
     count: number;
     pageCount: number;
     currentPage: number;
