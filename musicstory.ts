@@ -145,6 +145,7 @@ export interface MusicStoryError {
 export interface MusicStoryResponse<T> {
     version: string;
     code: Codes;
+    error?: MusicStoryError;
     count: number;
     pageCount: number;
     currentPage: number;
