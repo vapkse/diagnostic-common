@@ -124,7 +124,7 @@ export interface Biography extends Info {
 }
 
 export class MusicStory {
-    public artists = new Array<Artist>();
+    public artists: Array<MusicStoryResponse<Artist>>;
     public album: string;
     public title: string;
     public query: string;
@@ -137,4 +137,5 @@ export interface MusicStoryResponse<T> {
     pageCount: number;
     currentPage: number;
     data: Array<T>;
+    cacheKey: string;
 }
