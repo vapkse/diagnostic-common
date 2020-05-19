@@ -1,6 +1,6 @@
 export type WebLinkType = 'Official' | 'NotOfficial' | 'MusicBrainz';
 
-export type Codes = -1 | -2|-3 | -9;
+export type Codes = -1 | -2 | -3 | -9;
 
 export interface Artist extends Info {
     [subInfos: string]: any;
@@ -136,12 +136,71 @@ export class MusicStory {
     public query: string;
 }
 
+export interface MusicStoryError {
+    errorcode: number;
+    message: string;
+    type: string;
+}
+
 export interface MusicStoryResponse<T> {
     version: string;
     code: Codes;
+    error?: MusicStoryError;
     count: number;
     pageCount: number;
     currentPage: number;
     data: Array<T>;
     cacheKey: string;
 }
+
+export const MusicStoryErrors = [
+    {
+        code: 40301,
+        message: 'Votre compteur de requête mensuel est atteint'
+    }, {
+        code: 40302,
+        message: 'Votre compteur de requête d\'items de type Éditorial est atteint'
+    }, {
+        code: 40401,
+        message: 'Objet inconnu'
+    }, {
+        code: 40402,
+        message: 'Objet introuvable'
+    }, {
+        code: 40403,
+        message: 'Connecteur inconnu'
+    }, {
+        code: 40404,
+        message: 'Connecteur introuvable'
+    }, {
+        code: 40405,
+        message: 'Pas de filtre pour la recherche'
+    }, {
+        code: 40406,
+        message: 'Index inaccessible pour cet objet'
+    }, {
+        code: 40407,
+        message: 'Paramètres manquants'
+    }, {
+        code: 40101,
+        message: 'Il faut spécifier au moins un des deux champs oauth_consumer_key dans le cas d\'une demande de token ou oauth_token_key pour toutes autres requêtes'
+    }, {
+        code: 40102,
+        message: 'Il faut spécifier le champs oauth_consumer_key'
+    }, {
+        code: 40103,
+        message: 'Il faut spécifier le champs oauth_token'
+    }, {
+        code: 40104,
+        message: 'Il faut spécifier le champs oauth_signature'
+    }, {
+        code: 40105,
+        message: 'La valeur de oauth_consumer_key est incorrecte, la clé publique OAuth est introuvable'
+    }, {
+        code: 40106,
+        message: 'La valeur de oauth_token_key est incorrecte, le token d\'accès OAuth est introuvable'
+    }, {
+        code: 40107,
+        message: 'La signature OAuth est incorrecte. Pour calculer la signature, référez vous a la RFC OAuth 1.0'
+    }
+];
