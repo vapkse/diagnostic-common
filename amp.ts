@@ -3,7 +3,7 @@ export const serialBufferMaxLength = 64;
 export type DataHeaderKeys = 'id' | 'msg' | 'errorNumber' | 'extraValue' | 'step' | 'steptmax' | 'steptelaps' | 'stepvmax' | 'stepval' | 'tick';
 
 export interface AmpStep {
-    [key: string]: any;
+    [key: string]: string | boolean;
     label: string;
     isError?: boolean;
 }
@@ -238,7 +238,7 @@ export interface AmpError {
 }
 
 export interface StepInfo {
-    [key: string]: any;
+    [key: string]: string | number | boolean;
     label: string;
     labelColor?: string;
     range: number;
@@ -263,7 +263,11 @@ export interface AmpInfoMeasure {
     width?: string;
 }
 
+export type ControlPanelTypes = 'reset' | 'resetModulation' | 'stop';
+export type AmpInfoInterfaceTypes = string | number | boolean | Array<Tubeinfo> | Array<number> | ModulationInfo | Array<StepInfo> | Array<AmpInfoPicture> | Array<AmpInfoSchematic> | Array<AmpInfoMeasure> | Array<ControlPanelTypes>;
+
 export interface AmpInfoInterface {
+    [index: string]: AmpInfoTypes;
     name?: string;
     id: number;
     description?: string;
@@ -299,10 +303,14 @@ export interface AmpInfoInterface {
     schematics?: Array<AmpInfoSchematic>;
     measuresPath?: string;
     measures?: Array<AmpInfoMeasure>;
-    controlsPanel?: Array<'reset' | 'resetModulation' | 'stop'>;
+    controlsPanel?: Array<ControlPanelTypes>;
 }
 
+export type AmpInfoMergeType = (baseInfos: AmpInfo) => void;
+export type AmpInfoTypes = AmpInfoInterfaceTypes | AmpStatus | AmpDataHeader | AmpInfoInterface | Map<number, StepInfo> | Set<ControlPanelTypes> | AmpInfoMergeType;
+
 export class AmpInfo implements AmpInfoInterface {
+    [index: string]: AmpInfoTypes;
     public host: string;
     public status: AmpStatus;
     public port: string;
@@ -310,7 +318,7 @@ export class AmpInfo implements AmpInfoInterface {
 
     private _values: AmpInfoInterface;
     private _stepMap: Map<number, StepInfo>;
-    private _controlsSet: Set<'reset' | 'resetModulation' | 'stop'>;
+    private _controlsSet: Set<ControlPanelTypes>;
 
     public constructor(values: AmpInfoInterface) {
         this._values = values;
@@ -487,7 +495,7 @@ export class AmpInfo implements AmpInfoInterface {
             return this._controlsSet;
         }
 
-        this._controlsSet = new Set<'reset' | 'resetModulation' | 'stop'>();
+        this._controlsSet = new Set<ControlPanelTypes>();
 
         if (this._values.controlsPanel) {
             this._controlsSet = this._values.controlsPanel.reduce((s, control) => s.add(control), this._controlsSet);
@@ -497,8 +505,8 @@ export class AmpInfo implements AmpInfoInterface {
     }
 
     public merge(baseInfos: AmpInfo) {
-        const val = this._values as any;
-        const base = baseInfos._values as any;
+        const val = this._values;
+        const base = baseInfos._values;
 
         Object.keys(base)
             .filter(key => val[key] === undefined)
@@ -510,7 +518,10 @@ export class AmpInfo implements AmpInfoInterface {
     }
 }
 
+export type AmpResponseTypes = number | number[];
+
 export interface AmpResponse {
+    [index: string]: AmpResponseTypes;
     id: number;
     msg: number;
     errorNumber: number;
@@ -537,6 +548,7 @@ export interface AmpDataHeader extends AmpResponse {
     min?: number | number[];
     max?: number | number[];
     ref?: number | number[];
+    modlimits?: number[];
 }
 
 export interface AmpStatus {

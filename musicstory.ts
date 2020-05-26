@@ -3,7 +3,7 @@ export type WebLinkType = 'Official' | 'NotOfficial' | 'MusicBrainz';
 export type Codes = -1 | -2 | -3 | -9;
 
 export interface Artist extends Info {
-    [subInfos: string]: any;
+    [subInfos: string]: string | number;
     name: string; // Nom complet
     ipi: string; // IPI
     type: 'band' | 'person'; // Est-ce un groupe ou une personne?
@@ -204,3 +204,7 @@ export const MusicStoryErrors = [
         message: 'La signature OAuth est incorrecte. Pour calculer la signature, référez vous a la RFC OAuth 1.0'
     }
 ];
+
+export interface MusicStoryMessage {
+    musicstory: MusicStory;
+}
