@@ -1,7 +1,5 @@
 export const serialBufferMaxLength = 64;
 
-export type DataHeaderKeys = 'id' | 'msg' | 'errorNumber' | 'extraValue' | 'step' | 'steptmax' | 'steptelaps' | 'stepvmax' | 'stepval' | 'tick';
-
 export interface AmpStep {
     [key: string]: string | boolean;
     label: string;
