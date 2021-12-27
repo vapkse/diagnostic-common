@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/naming-convention */
 export const serialBufferMaxLength = 64;
 
 export interface AmpStep {
@@ -322,139 +323,139 @@ export class AmpInfo implements AmpInfoInterface {
         this._values = values;
     }
 
-    public get name() {
+    public get name(): string {
         return this._values.name;
     }
 
-    public get id() {
+    public get id(): number {
         return this._values.id;
     }
 
-    public get description() {
+    public get description(): string {
         return this._values.description;
     }
 
-    public get dampingfactor() {
+    public get dampingfactor(): number {
         return this._values.dampingfactor;
     }
 
-    public get power() {
+    public get power(): string {
         return this._values.power;
     }
 
-    public get bandwidth() {
+    public get bandwidth(): string {
         return this._values.bandwidth;
     }
 
-    public get amplificationfactor() {
+    public get amplificationfactor(): number {
         return this._values.amplificationfactor;
     }
 
-    public get inverter() {
+    public get inverter(): boolean {
         return this._values.inverter;
     }
 
-    public get tubes() {
+    public get tubes(): Tubeinfo[] {
         return this._values.tubes;
     }
 
-    public get url() {
+    public get url(): string {
         return this._values.url;
     }
 
-    public get valueFactor() {
+    public get valueFactor(): number {
         return this._values.valueFactor;
     }
 
-    public get valueOffset() {
+    public get valueOffset(): number {
         return this._values.valueOffset;
     }
 
-    public get valueUnit() {
+    public get valueUnit(): string {
         return this._values.valueUnit;
     }
 
-    public get refFactor() {
+    public get refFactor(): number {
         return this._values.refFactor;
     }
 
-    public get refOffset() {
+    public get refOffset(): number {
         return this._values.refOffset;
     }
 
-    public get outputLimits() {
+    public get outputLimits(): number[] {
         return this._values.outputLimits;
     }
 
-    public get dataInfos() {
+    public get dataInfos(): FieldInfo[] {
         return this._values.dataInfos;
     }
 
-    public get modulationInfos() {
+    public get modulationInfos(): ModulationInfo {
         return this._values.modulationInfos;
     }
 
-    public get visible() {
+    public get visible(): boolean {
         return this._values.visible;
     }
 
-    public get paramsInfos() {
+    public get paramsInfos(): FieldInfo[] {
         return this._values.paramsInfos;
     }
 
-    public get paramsPanelTitle() {
+    public get paramsPanelTitle(): string {
         return this._values.paramsPanelTitle;
     }
 
-    public get master() {
+    public get master(): number {
         return this._values.master;
     }
 
-    public get inherits() {
+    public get inherits(): number {
         return this._values.inherits;
     }
 
-    public get baseSection() {
+    public get baseSection(): boolean {
         return this._values.baseSection;
     }
 
-    public get order() {
+    public get order(): number {
         return this._values.order;
     }
 
-    public get modFactor() {
+    public get modFactor(): number {
         return this._values.modFactor;
     }
 
-    public get picturesPath() {
+    public get picturesPath(): string {
         return this._values.picturesPath;
     }
 
-    public get pictures() {
+    public get pictures(): AmpInfoPicture[] {
         return this._values.pictures;
     }
 
-    public get schematicsPath() {
+    public get schematicsPath(): string {
         return this._values.schematicsPath;
     }
 
-    public get schematics() {
+    public get schematics(): AmpInfoSchematic[] {
         return this._values.schematics;
     }
 
-    public get measuresPath() {
+    public get measuresPath(): string {
         return this._values.measuresPath;
     }
 
-    public get measures() {
+    public get measures(): AmpInfoMeasure[] {
         return this._values.measures;
     }
 
-    public get controlsPanel() {
+    public get controlsPanel(): ControlPanelTypes[] {
         return this._values.controlsPanel;
     }
 
-    public get isMaster() {
+    public get isMaster(): boolean {
         return this._values.isMaster;
     }
 
@@ -462,7 +463,7 @@ export class AmpInfo implements AmpInfoInterface {
         this._values.isMaster = value;
     }
 
-    public get stepMap() {
+    public get stepMap(): Map<number, StepInfo> {
         if (this._stepMap) {
             return this._stepMap;
         }
@@ -488,7 +489,7 @@ export class AmpInfo implements AmpInfoInterface {
         return this._stepMap;
     }
 
-    public get controlsSet() {
+    public get controlsSet(): Set<ControlPanelTypes> {
         if (this._controlsSet) {
             return this._controlsSet;
         }
@@ -502,7 +503,7 @@ export class AmpInfo implements AmpInfoInterface {
         return this._controlsSet;
     }
 
-    public merge(baseInfos: AmpInfo) {
+    public merge(baseInfos: AmpInfo): void {
         const val = this._values;
         const base = baseInfos._values;
 

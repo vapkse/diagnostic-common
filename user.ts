@@ -15,6 +15,7 @@ export interface DbUser extends UserEmail {
     provider?: string;
     failAttempts?: number;
     lastLogin?: number;
+    // eslint-disable-next-line @typescript-eslint/naming-convention
     lastIP?: string;
 }
 

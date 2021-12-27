@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/naming-convention */
 export type WebLinkType = 'Official' | 'NotOfficial' | 'MusicBrainz';
 
 export type Codes = 0 | -1 | -2 | -3 | -9;
