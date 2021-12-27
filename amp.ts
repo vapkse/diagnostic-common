@@ -2,7 +2,7 @@
 export const serialBufferMaxLength = 64;
 
 export interface AmpStep {
-    [key: string]: string | boolean;
+    [key: string]: string | boolean | undefined;
     label: string;
     isError?: boolean;
 }
@@ -237,7 +237,7 @@ export interface AmpError {
 }
 
 export interface StepInfo {
-    [key: string]: string | number | boolean;
+    [key: string]: string | number | boolean | undefined;
     label: string;
     labelColor?: string;
     range: number;
@@ -266,9 +266,9 @@ export type ControlPanelTypes = 'reset' | 'resetModulation' | 'stop';
 export type AmpInfoInterfaceTypes = string | number | boolean | Array<Tubeinfo> | Array<number> | ModulationInfo | Array<StepInfo> | Array<AmpInfoPicture> | Array<AmpInfoSchematic> | Array<AmpInfoMeasure> | Array<ControlPanelTypes>;
 
 export interface AmpInfoInterface {
-    [index: string]: AmpInfoTypes;
+    [index: string]: AmpInfoTypes | string | number | undefined;
     name?: string;
-    id: number;
+    id?: number;
     description?: string;
     dampingfactor?: number;
     power?: string;
@@ -309,157 +309,161 @@ export type AmpInfoMergeType = (baseInfos: AmpInfo) => void;
 export type AmpInfoTypes = AmpInfoInterfaceTypes | AmpStatus | AmpDataHeader | AmpInfoInterface | Map<number, StepInfo> | Set<ControlPanelTypes> | AmpInfoMergeType;
 
 export class AmpInfo implements AmpInfoInterface {
-    [index: string]: AmpInfoTypes;
-    public host: string;
-    public status: AmpStatus;
-    public port: string;
-    public datas: AmpDataHeader;
+    [index: string]: AmpInfoTypes | string | number | undefined;
+    public host: string = undefined as never;
+    public status: AmpStatus = undefined as never;
+    public port: string = undefined as never;
+    public datas: AmpDataHeader = undefined as never;
 
     private _values: AmpInfoInterface;
-    private _stepMap: Map<number, StepInfo>;
-    private _controlsSet: Set<ControlPanelTypes>;
+    private _stepMap: Map<number, StepInfo> = undefined as never;
+    private _controlsSet: Set<ControlPanelTypes> = undefined as never;
 
     public constructor(values: AmpInfoInterface) {
         this._values = values;
     }
 
-    public get name(): string {
-        return this._values.name;
+    public get name(): string | undefined {
+        return this._values?.name;
     }
 
-    public get id(): number {
-        return this._values.id;
+    public get id(): number | undefined {
+        return this._values?.id;
     }
 
-    public get description(): string {
-        return this._values.description;
+    public get description(): string | undefined {
+        return this._values?.description;
     }
 
-    public get dampingfactor(): number {
-        return this._values.dampingfactor;
+    public get dampingfactor(): number | undefined {
+        return this._values?.dampingfactor;
     }
 
-    public get power(): string {
-        return this._values.power;
+    public get power(): string | undefined {
+        return this._values?.power;
     }
 
-    public get bandwidth(): string {
-        return this._values.bandwidth;
+    public get bandwidth(): string | undefined {
+        return this._values?.bandwidth;
     }
 
-    public get amplificationfactor(): number {
-        return this._values.amplificationfactor;
+    public get amplificationfactor(): number | undefined {
+        return this._values?.amplificationfactor;
     }
 
-    public get inverter(): boolean {
-        return this._values.inverter;
+    public get inverter(): boolean | undefined {
+        return this._values?.inverter;
     }
 
-    public get tubes(): Tubeinfo[] {
-        return this._values.tubes;
+    public get tubes(): Tubeinfo[] | undefined {
+        return this._values?.tubes;
     }
 
-    public get url(): string {
-        return this._values.url;
+    public get url(): string | undefined {
+        return this._values?.url;
     }
 
-    public get valueFactor(): number {
-        return this._values.valueFactor;
+    public get valueFactor(): number | undefined {
+        return this._values?.valueFactor;
     }
 
-    public get valueOffset(): number {
-        return this._values.valueOffset;
+    public get valueOffset(): number | undefined {
+        return this._values?.valueOffset;
     }
 
-    public get valueUnit(): string {
-        return this._values.valueUnit;
+    public get valueUnit(): string | undefined {
+        return this._values?.valueUnit;
     }
 
-    public get refFactor(): number {
-        return this._values.refFactor;
+    public get refFactor(): number | undefined {
+        return this._values?.refFactor;
     }
 
-    public get refOffset(): number {
-        return this._values.refOffset;
+    public get refOffset(): number | undefined {
+        return this._values?.refOffset;
     }
 
-    public get outputLimits(): number[] {
-        return this._values.outputLimits;
+    public get outputLimits(): number[] | undefined {
+        return this._values?.outputLimits;
     }
 
-    public get dataInfos(): FieldInfo[] {
-        return this._values.dataInfos;
+    public get dataInfos(): FieldInfo[] | undefined {
+        return this._values?.dataInfos;
     }
 
-    public get modulationInfos(): ModulationInfo {
-        return this._values.modulationInfos;
+    public get modulationInfos(): ModulationInfo | undefined {
+        return this._values?.modulationInfos;
     }
 
-    public get visible(): boolean {
-        return this._values.visible;
+    public get visible(): boolean | undefined {
+        return this._values?.visible;
     }
 
-    public get paramsInfos(): FieldInfo[] {
-        return this._values.paramsInfos;
+    public get paramsInfos(): FieldInfo[] | undefined {
+        return this._values?.paramsInfos;
     }
 
-    public get paramsPanelTitle(): string {
-        return this._values.paramsPanelTitle;
+    public get paramsPanelTitle(): string | undefined {
+        return this._values?.paramsPanelTitle;
     }
 
-    public get master(): number {
-        return this._values.master;
+    public get master(): number | undefined {
+        return this._values?.master;
     }
 
-    public get inherits(): number {
-        return this._values.inherits;
+    public get inherits(): number | undefined {
+        return this._values?.inherits;
     }
 
-    public get baseSection(): boolean {
-        return this._values.baseSection;
+    public get baseSection(): boolean | undefined {
+        return this._values?.baseSection;
     }
 
-    public get order(): number {
-        return this._values.order;
+    public get order(): number | undefined {
+        return this._values?.order;
     }
 
-    public get modFactor(): number {
-        return this._values.modFactor;
+    public get modFactor(): number | undefined {
+        return this._values?.modFactor;
     }
 
-    public get picturesPath(): string {
-        return this._values.picturesPath;
+    public get picturesPath(): string | undefined {
+        return this._values?.picturesPath;
     }
 
-    public get pictures(): AmpInfoPicture[] {
-        return this._values.pictures;
+    public get pictures(): AmpInfoPicture[] | undefined {
+        return this._values?.pictures;
     }
 
-    public get schematicsPath(): string {
-        return this._values.schematicsPath;
+    public get schematicsPath(): string | undefined {
+        return this._values?.schematicsPath;
     }
 
-    public get schematics(): AmpInfoSchematic[] {
-        return this._values.schematics;
+    public get schematics(): AmpInfoSchematic[] | undefined {
+        return this._values?.schematics;
     }
 
-    public get measuresPath(): string {
-        return this._values.measuresPath;
+    public get measuresPath(): string | undefined {
+        return this._values?.measuresPath;
     }
 
-    public get measures(): AmpInfoMeasure[] {
-        return this._values.measures;
+    public get measures(): AmpInfoMeasure[] | undefined {
+        return this._values?.measures;
     }
 
-    public get controlsPanel(): ControlPanelTypes[] {
-        return this._values.controlsPanel;
+    public get controlsPanel(): ControlPanelTypes[] | undefined {
+        return this._values?.controlsPanel;
     }
 
-    public get isMaster(): boolean {
-        return this._values.isMaster;
+    public get isMaster(): boolean | undefined {
+        return this._values?.isMaster;
     }
 
-    public set isMaster(value: boolean) {
+    public set isMaster(value: boolean | undefined) {
+        if (!this._values) {
+            return;
+        }
+
         this._values.isMaster = value;
     }
 
@@ -468,7 +472,7 @@ export class AmpInfo implements AmpInfoInterface {
             return this._stepMap;
         }
 
-        if (!this._values.steps) {
+        if (!this._values?.steps) {
             this._stepMap = new Map<number, StepInfo>();
         } else {
             this._stepMap = this._values.steps.reduce((m, step, index) => m.set(index, step || {} as StepInfo), new Map<number, StepInfo>());
@@ -513,14 +517,14 @@ export class AmpInfo implements AmpInfoInterface {
                 val[key] = base[key];
             });
 
-        this._stepMap = undefined;
+        this._stepMap = undefined as never;
     }
 }
 
 export type AmpResponseTypes = number | number[];
 
 export interface AmpResponse {
-    [index: string]: AmpResponseTypes;
+    [index: string]: AmpResponseTypes | number | undefined;
     id: number;
     msg: number;
     errorNumber: number;

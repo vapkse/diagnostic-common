@@ -3,12 +3,16 @@ export type WebLinkType = 'Official' | 'NotOfficial' | 'MusicBrainz';
 
 export type Codes = 0 | -1 | -2 | -3 | -9;
 
+export type Types = 'band' | 'person';
+
+export type Sex = 'male' | 'female';
+
 export interface Artist extends Info {
-    [subInfos: string]: string | number;
+    [subInfos: string]: string | number | Types | Sex | undefined;
     name: string; // Nom complet
     ipi: string; // IPI
-    type: 'band' | 'person'; // Est-ce un groupe ou une personne?
-    sex?: 'male' | 'female'; // Sexe si c'est une personne
+    type: Types; // Est-ce un groupe ou une personne?
+    sex?: Sex; // Sexe si c'est une personne
     main_role?: string; // Rôle
     url: string; // Url sur le site Music Story
     firstname: string; // Prénom
@@ -131,10 +135,10 @@ export interface Biography extends Info {
 }
 
 export class MusicStory {
-    public artists: Array<MusicStoryResponse<Artist>>;
-    public album: string;
-    public title: string;
-    public query: string;
+    public artists: Array<MusicStoryResponse<Artist>> = undefined as never;
+    public album: string = undefined as never;
+    public title: string = undefined as never;
+    public query: string = undefined as never;
 }
 
 export interface MusicStoryError {
