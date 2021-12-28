@@ -531,6 +531,15 @@ export interface AmpResponse {
     extraValue: number;
 }
 
+export interface AmpRequestResponse {
+    id: number;
+    msg: number;
+    port: string;
+    error?: string;
+    datas?: AmpDataHeader;
+    nextTime: number;
+}
+
 export interface AmpDataHeader extends AmpResponse {
     step: number;
     steptmax: number;
