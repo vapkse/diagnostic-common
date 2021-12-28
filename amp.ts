@@ -266,7 +266,7 @@ export type ControlPanelTypes = 'reset' | 'resetModulation' | 'stop';
 export type AmpInfoInterfaceTypes = string | number | boolean | Array<Tubeinfo> | Array<number> | ModulationInfo | Array<StepInfo> | Array<AmpInfoPicture> | Array<AmpInfoSchematic> | Array<AmpInfoMeasure> | Array<ControlPanelTypes>;
 
 export interface AmpInfoInterface {
-    [index: string]: AmpInfoTypes | string | number | undefined;
+    [index: string]: AmpInfoTypes;
     name?: string;
     id?: number;
     description?: string;
@@ -306,10 +306,10 @@ export interface AmpInfoInterface {
 }
 
 export type AmpInfoMergeType = (baseInfos: AmpInfo) => void;
-export type AmpInfoTypes = AmpInfoInterfaceTypes | AmpStatus | AmpDataHeader | AmpInfoInterface | Map<number, StepInfo> | Set<ControlPanelTypes> | AmpInfoMergeType;
+export type AmpInfoTypes = AmpInfoInterfaceTypes | AmpStatus | AmpDataHeader | AmpInfoInterface | Map<number, StepInfo> | Set<ControlPanelTypes> | AmpInfoMergeType | string | number | undefined;
 
 export class AmpInfo implements AmpInfoInterface {
-    [index: string]: AmpInfoTypes | string | number | undefined;
+    [index: string]: AmpInfoTypes;
     public host: string = undefined as never;
     public status: AmpStatus = undefined as never;
     public port: string = undefined as never;
@@ -521,10 +521,10 @@ export class AmpInfo implements AmpInfoInterface {
     }
 }
 
-export type AmpResponseTypes = number | number[];
+export type AmpResponseTypes = number | number | { [index: string]: number } | undefined;
 
 export interface AmpResponse {
-    [index: string]: AmpResponseTypes | number | undefined;
+    [index: string]: AmpResponseTypes;
     id: number;
     msg: number;
     errorNumber: number;
@@ -546,12 +546,12 @@ export interface AmpDataHeader extends AmpResponse {
     // Client fields
     ctrlflags?: number;
     temp?: number;
-    val?: number[];
-    out?: number[];
-    min?: number | number[];
-    max?: number | number[];
-    ref?: number | number[];
-    modlimits?: number[];
+    val?: { [index: string]: number };
+    out?: { [index: string]: number };
+    min?: number | { [index: string]: number };
+    max?: number | { [index: string]: number };
+    ref?: number | { [index: string]: number };
+    modlimits?: { [index: string]: number };
 }
 
 export interface AmpStatus {
