@@ -300,11 +300,6 @@ export interface AmpInfoInterface {
 }
 
 export class AmpInfo implements AmpInfoInterface {
-    public host: string = undefined as never;
-    public status: AmpStatus = undefined as never;
-    public port: string = undefined as never;
-    public datas: AmpDataHeader = undefined as never;
-
     private values: AmpInfoInterface;
     private _stepMap: Map<number, StepInfo> = undefined as never;
     private _controlsSet: Set<ControlPanelTypes> = undefined as never;
