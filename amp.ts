@@ -219,9 +219,9 @@ export interface FieldInfo {
     type: string;
     name: string;
     title?: string;
-    fields?: Array<FieldInfo>;
+    fields?: ReadonlyArray<FieldInfo>;
     slider?: SliderInfo;
-    toggles?: Array<ToggleInfo>;
+    toggles?: ReadonlyArray<ToggleInfo>;
     index?: number;
 }
 
@@ -263,7 +263,7 @@ export interface AmpInfoMeasure {
 }
 
 export type ControlPanelTypes = 'reset' | 'resetModulation' | 'stop';
-export type AmpInfoInterfaceTypes = string | number | boolean | Array<Tubeinfo> | Array<number> | ModulationInfo | Array<StepInfo> | Array<AmpInfoPicture> | Array<AmpInfoSchematic> | Array<AmpInfoMeasure> | Array<ControlPanelTypes>;
+export type AmpInfoInterfaceTypes = string | number | boolean | ReadonlyArray<Tubeinfo> | ReadonlyArray<number> | ModulationInfo | ReadonlyArray<StepInfo> | ReadonlyArray<AmpInfoPicture> | ReadonlyArray<AmpInfoSchematic> | ReadonlyArray<AmpInfoMeasure> | ReadonlyArray<ControlPanelTypes>;
 
 export interface AmpInfoInterface {
     [index: string]: AmpInfoTypes;
@@ -275,20 +275,20 @@ export interface AmpInfoInterface {
     bandwidth?: string;
     amplificationfactor?: number;
     inverter?: boolean;
-    tubes?: Array<Tubeinfo>;
+    tubes?: ReadonlyArray<Tubeinfo>;
     url?: string;
     valueFactor?: number;
     valueOffset?: number;
     valueUnit?: string;
     refFactor?: number;
     refOffset?: number;
-    outputLimits?: Array<number>;
-    dataInfos?: Array<FieldInfo>;
+    outputLimits?: ReadonlyArray<number>;
+    dataInfos?: ReadonlyArray<FieldInfo>;
     modulationInfos?: ModulationInfo;
-    steps?: Array<StepInfo>;
+    steps?: ReadonlyArray<StepInfo>;
     visible?: boolean;
-    controlsInfos?: Array<FieldInfo>;
-    paramsInfos?: Array<FieldInfo>;
+    controlsInfos?: ReadonlyArray<FieldInfo>;
+    paramsInfos?: ReadonlyArray<FieldInfo>;
     paramsPanelTitle?: string;
     master?: number;
     inherits?: number;
@@ -297,12 +297,12 @@ export interface AmpInfoInterface {
     order?: number;
     modFactor?: number;
     picturesPath?: string;
-    pictures?: Array<AmpInfoPicture>;
+    pictures?: ReadonlyArray<AmpInfoPicture>;
     schematicsPath?: string;
-    schematics?: Array<AmpInfoSchematic>;
+    schematics?: ReadonlyArray<AmpInfoSchematic>;
     measuresPath?: string;
-    measures?: Array<AmpInfoMeasure>;
-    controlsPanel?: Array<ControlPanelTypes>;
+    measures?: ReadonlyArray<AmpInfoMeasure>;
+    controlsPanel?: ReadonlyArray<ControlPanelTypes>;
 }
 
 export type AmpInfoMergeType = (baseInfos: AmpInfo) => void;
@@ -355,7 +355,7 @@ export class AmpInfo implements AmpInfoInterface {
         return this._values?.inverter;
     }
 
-    public get tubes(): Tubeinfo[] | undefined {
+    public get tubes(): ReadonlyArray<Tubeinfo> | undefined {
         return this._values?.tubes;
     }
 
@@ -383,11 +383,11 @@ export class AmpInfo implements AmpInfoInterface {
         return this._values?.refOffset;
     }
 
-    public get outputLimits(): number[] | undefined {
+    public get outputLimits(): ReadonlyArray<number> | undefined {
         return this._values?.outputLimits;
     }
 
-    public get dataInfos(): FieldInfo[] | undefined {
+    public get dataInfos(): ReadonlyArray<FieldInfo> | undefined {
         return this._values?.dataInfos;
     }
 
@@ -399,7 +399,7 @@ export class AmpInfo implements AmpInfoInterface {
         return this._values?.visible;
     }
 
-    public get paramsInfos(): FieldInfo[] | undefined {
+    public get paramsInfos(): ReadonlyArray<FieldInfo> | undefined {
         return this._values?.paramsInfos;
     }
 
@@ -431,7 +431,7 @@ export class AmpInfo implements AmpInfoInterface {
         return this._values?.picturesPath;
     }
 
-    public get pictures(): AmpInfoPicture[] | undefined {
+    public get pictures(): ReadonlyArray<AmpInfoPicture> | undefined {
         return this._values?.pictures;
     }
 
@@ -439,7 +439,7 @@ export class AmpInfo implements AmpInfoInterface {
         return this._values?.schematicsPath;
     }
 
-    public get schematics(): AmpInfoSchematic[] | undefined {
+    public get schematics(): ReadonlyArray<AmpInfoSchematic> | undefined {
         return this._values?.schematics;
     }
 
@@ -447,11 +447,11 @@ export class AmpInfo implements AmpInfoInterface {
         return this._values?.measuresPath;
     }
 
-    public get measures(): AmpInfoMeasure[] | undefined {
+    public get measures(): ReadonlyArray<AmpInfoMeasure> | undefined {
         return this._values?.measures;
     }
 
-    public get controlsPanel(): ControlPanelTypes[] | undefined {
+    public get controlsPanel(): ReadonlyArray<ControlPanelTypes> | undefined {
         return this._values?.controlsPanel;
     }
 
