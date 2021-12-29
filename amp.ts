@@ -2,7 +2,6 @@
 export const serialBufferMaxLength = 64;
 
 export interface AmpStep {
-    [key: string]: string | boolean | undefined;
     label: string;
     isError?: boolean;
 }
@@ -236,12 +235,9 @@ export interface AmpError {
     descr: string;
 }
 
-export interface StepInfo {
-    [key: string]: string | number | boolean | undefined;
-    label: string;
+export interface StepInfo extends AmpStep {
     labelColor?: string;
     range: number;
-    isError?: boolean;
 }
 
 export interface AmpInfoPicture {
@@ -263,10 +259,8 @@ export interface AmpInfoMeasure {
 }
 
 export type ControlPanelTypes = 'reset' | 'resetModulation' | 'stop';
-export type AmpInfoInterfaceTypes = string | number | boolean | ReadonlyArray<Tubeinfo> | ReadonlyArray<number> | ModulationInfo | ReadonlyArray<StepInfo> | ReadonlyArray<AmpInfoPicture> | ReadonlyArray<AmpInfoSchematic> | ReadonlyArray<AmpInfoMeasure> | ReadonlyArray<ControlPanelTypes>;
 
 export interface AmpInfoInterface {
-    [index: string]: AmpInfoTypes;
     name?: string;
     id?: number;
     description?: string;
@@ -305,11 +299,7 @@ export interface AmpInfoInterface {
     controlsPanel?: ReadonlyArray<ControlPanelTypes>;
 }
 
-export type AmpInfoMergeType = (baseInfos: AmpInfo) => void;
-export type AmpInfoTypes = AmpInfoInterfaceTypes | AmpStatus | AmpDataHeader | AmpInfoInterface | Map<number, StepInfo> | Set<ControlPanelTypes> | AmpInfoMergeType | string | number | undefined;
-
 export class AmpInfo implements AmpInfoInterface {
-    [index: string]: AmpInfoTypes;
     public host: string = undefined as never;
     public status: AmpStatus = undefined as never;
     public port: string = undefined as never;
@@ -483,9 +473,10 @@ export class AmpInfo implements AmpInfoInterface {
             const defaultStep = AmpSteps.get(key);
             if (defaultStep) {
                 Object.keys(defaultStep)
+                    .map(k => k as keyof AmpStep)
                     .filter(k => step[k] === undefined)
                     .forEach(k => {
-                        step[k] = defaultStep[k];
+                        step[k] = defaultStep[k] as never;
                     });
             }
         });
@@ -512,16 +503,15 @@ export class AmpInfo implements AmpInfoInterface {
         const base = baseInfos._values;
 
         Object.keys(base)
+            .map(key => key as keyof AmpInfoInterface)
             .filter(key => val[key] === undefined)
             .forEach(key => {
-                val[key] = base[key];
+                val[key] = base[key] as never;
             });
 
         this._stepMap = undefined as never;
     }
 }
-
-export type AmpResponseTypes = number | number | { [index: string]: number } | undefined;
 
 export interface AmpRequest {
     id: number;
@@ -530,7 +520,6 @@ export interface AmpRequest {
 }
 
 export interface AmpResponse {
-    [index: string]: AmpResponseTypes;
     id: number;
     msg: number;
     errorNumber: number;
