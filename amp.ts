@@ -553,8 +553,10 @@ export interface AmpDataHeader extends AmpResponse {
 }
 
 export interface AmpStatus {
+    id: number;
     status: number;
     statusText: string;
+    step: number;
     lastseen: number;
     interval?: string;
     flags?: boolean; // Indicate if working point is manual or differential feedback is off
