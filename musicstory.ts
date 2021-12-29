@@ -114,7 +114,7 @@ export interface Picture extends Info {
 }
 
 export interface Genre extends Info {
-    link: string[];
+    link: ReadonlyArray<string>;
     name: string;
     url: string;
     main: number;
@@ -151,11 +151,11 @@ export interface MusicStoryResponse<T> {
     version: string;
     code: Codes;
     error?: MusicStoryError;
-    count: number;
-    pageCount: number;
-    currentPage: number;
+    count?: number;
+    pageCount?: number;
+    currentPage?: number;
     data: ReadonlyArray<T>;
-    cacheKey: string;
+    cacheKey?: string;
 }
 
 export const MusicStoryErrors = [
