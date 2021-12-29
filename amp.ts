@@ -315,156 +315,156 @@ export class AmpInfo implements AmpInfoInterface {
     public port: string = undefined as never;
     public datas: AmpDataHeader = undefined as never;
 
-    private _values: AmpInfoInterface;
+    private values: AmpInfoInterface;
     private _stepMap: Map<number, StepInfo> = undefined as never;
     private _controlsSet: Set<ControlPanelTypes> = undefined as never;
 
     public constructor(values: AmpInfoInterface) {
-        this._values = values;
+        this.values = values;
     }
 
     public get name(): string | undefined {
-        return this._values?.name;
+        return this.values?.name;
     }
 
     public get id(): number | undefined {
-        return this._values?.id;
+        return this.values?.id;
     }
 
     public get description(): string | undefined {
-        return this._values?.description;
+        return this.values?.description;
     }
 
     public get dampingfactor(): number | undefined {
-        return this._values?.dampingfactor;
+        return this.values?.dampingfactor;
     }
 
     public get power(): string | undefined {
-        return this._values?.power;
+        return this.values?.power;
     }
 
     public get bandwidth(): string | undefined {
-        return this._values?.bandwidth;
+        return this.values?.bandwidth;
     }
 
     public get amplificationfactor(): number | undefined {
-        return this._values?.amplificationfactor;
+        return this.values?.amplificationfactor;
     }
 
     public get inverter(): boolean | undefined {
-        return this._values?.inverter;
+        return this.values?.inverter;
     }
 
     public get tubes(): ReadonlyArray<Tubeinfo> | undefined {
-        return this._values?.tubes;
+        return this.values?.tubes;
     }
 
     public get url(): string | undefined {
-        return this._values?.url;
+        return this.values?.url;
     }
 
     public get valueFactor(): number | undefined {
-        return this._values?.valueFactor;
+        return this.values?.valueFactor;
     }
 
     public get valueOffset(): number | undefined {
-        return this._values?.valueOffset;
+        return this.values?.valueOffset;
     }
 
     public get valueUnit(): string | undefined {
-        return this._values?.valueUnit;
+        return this.values?.valueUnit;
     }
 
     public get refFactor(): number | undefined {
-        return this._values?.refFactor;
+        return this.values?.refFactor;
     }
 
     public get refOffset(): number | undefined {
-        return this._values?.refOffset;
+        return this.values?.refOffset;
     }
 
     public get outputLimits(): ReadonlyArray<number> | undefined {
-        return this._values?.outputLimits;
+        return this.values?.outputLimits;
     }
 
     public get dataInfos(): ReadonlyArray<FieldInfo> | undefined {
-        return this._values?.dataInfos;
+        return this.values?.dataInfos;
     }
 
     public get modulationInfos(): ModulationInfo | undefined {
-        return this._values?.modulationInfos;
+        return this.values?.modulationInfos;
     }
 
     public get visible(): boolean | undefined {
-        return this._values?.visible;
+        return this.values?.visible;
     }
 
     public get paramsInfos(): ReadonlyArray<FieldInfo> | undefined {
-        return this._values?.paramsInfos;
+        return this.values?.paramsInfos;
     }
 
     public get paramsPanelTitle(): string | undefined {
-        return this._values?.paramsPanelTitle;
+        return this.values?.paramsPanelTitle;
     }
 
     public get master(): number | undefined {
-        return this._values?.master;
+        return this.values?.master;
     }
 
     public get inherits(): number | undefined {
-        return this._values?.inherits;
+        return this.values?.inherits;
     }
 
     public get baseSection(): boolean | undefined {
-        return this._values?.baseSection;
+        return this.values?.baseSection;
     }
 
     public get order(): number | undefined {
-        return this._values?.order;
+        return this.values?.order;
     }
 
     public get modFactor(): number | undefined {
-        return this._values?.modFactor;
+        return this.values?.modFactor;
     }
 
     public get picturesPath(): string | undefined {
-        return this._values?.picturesPath;
+        return this.values?.picturesPath;
     }
 
     public get pictures(): ReadonlyArray<AmpInfoPicture> | undefined {
-        return this._values?.pictures;
+        return this.values?.pictures;
     }
 
     public get schematicsPath(): string | undefined {
-        return this._values?.schematicsPath;
+        return this.values?.schematicsPath;
     }
 
     public get schematics(): ReadonlyArray<AmpInfoSchematic> | undefined {
-        return this._values?.schematics;
+        return this.values?.schematics;
     }
 
     public get measuresPath(): string | undefined {
-        return this._values?.measuresPath;
+        return this.values?.measuresPath;
     }
 
     public get measures(): ReadonlyArray<AmpInfoMeasure> | undefined {
-        return this._values?.measures;
+        return this.values?.measures;
     }
 
     public get controlsPanel(): ReadonlyArray<ControlPanelTypes> | undefined {
-        return this._values?.controlsPanel;
+        return this.values?.controlsPanel;
     }
 
     public get isMaster(): boolean | undefined {
-        return this._values?.isMaster;
+        return this.values?.isMaster;
     }
 
     public set isMaster(value: boolean | undefined) {
-        if (!this._values) {
+        if (!this.values) {
             return;
         }
 
-        this._values.isMaster = value;
+        this.values.isMaster = value;
     }
 
     public get stepMap(): Map<number, StepInfo> {
@@ -472,10 +472,10 @@ export class AmpInfo implements AmpInfoInterface {
             return this._stepMap;
         }
 
-        if (!this._values?.steps) {
+        if (!this.values?.steps) {
             this._stepMap = new Map<number, StepInfo>();
         } else {
-            this._stepMap = this._values.steps.reduce((m, step, index) => m.set(index, step || {} as StepInfo), new Map<number, StepInfo>());
+            this._stepMap = this.values.steps.reduce((m, step, index) => m.set(index, step || {} as StepInfo), new Map<number, StepInfo>());
         }
 
         // Merge steps with default
@@ -500,16 +500,16 @@ export class AmpInfo implements AmpInfoInterface {
 
         this._controlsSet = new Set<ControlPanelTypes>();
 
-        if (this._values.controlsPanel) {
-            this._controlsSet = this._values.controlsPanel.reduce((s, control) => s.add(control), this._controlsSet);
+        if (this.values.controlsPanel) {
+            this._controlsSet = this.values.controlsPanel.reduce((s, control) => s.add(control), this._controlsSet);
         }
 
         return this._controlsSet;
     }
 
     public merge(baseInfos: AmpInfo): void {
-        const val = this._values;
-        const base = baseInfos._values;
+        const val = this.values;
+        const base = baseInfos.values;
 
         Object.keys(base)
             .filter(key => val[key] === undefined)
@@ -521,7 +521,11 @@ export class AmpInfo implements AmpInfoInterface {
     }
 }
 
-export type AmpResponseTypes = number | number | { [index: string]: number } | undefined;
+export interface AmpIndexedValue {
+    [index: string]: number;
+}
+
+export type AmpResponseTypes = AmpIndexedValue | number | undefined;
 
 export interface AmpRequest {
     id: number;
@@ -555,13 +559,13 @@ export interface AmpDataHeader extends AmpResponse {
     tick: number;
     // Client fields
     ctrlflags?: number;
-    temp?: number;
-    val?: { [index: string]: number };
-    out?: { [index: string]: number };
-    min?: number | { [index: string]: number };
-    max?: number | { [index: string]: number };
-    ref?: number | { [index: string]: number };
-    modlimits?: { [index: string]: number };
+    temp?: AmpIndexedValue;
+    val?: AmpIndexedValue;
+    out?: AmpIndexedValue;
+    min?: number | AmpIndexedValue;
+    max?: number | AmpIndexedValue;
+    ref?: number | AmpIndexedValue;
+    modlimits?: AmpIndexedValue;
 }
 
 export interface AmpStatus {
