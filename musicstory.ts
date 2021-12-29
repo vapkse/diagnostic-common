@@ -114,7 +114,7 @@ export interface Picture extends Info {
 }
 
 export interface Genre extends Info {
-    link: string[];
+    link: ReadonlyArray<string>;
     name: string;
     url: string;
     main: number;
@@ -135,7 +135,7 @@ export interface Biography extends Info {
 }
 
 export class MusicStory {
-    public artists: Array<MusicStoryResponse<Artist>> = undefined as never;
+    public artists: ReadonlyArray<MusicStoryResponse<Artist>> = undefined as never;
     public album: string = undefined as never;
     public title: string = undefined as never;
     public query: string = undefined as never;
@@ -154,7 +154,7 @@ export interface MusicStoryResponse<T> {
     count: number;
     pageCount: number;
     currentPage: number;
-    data: Array<T>;
+    data: ReadonlyArray<T>;
     cacheKey: string;
 }
 
