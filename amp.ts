@@ -559,6 +559,9 @@ export interface AmpStatus {
     step: number;
     lastseen: number;
     interval?: string;
+    port: string;
+    master: number;
+    inherits: number;
     flags?: boolean; // Indicate if working point is manual or differential feedback is off
 }
 
