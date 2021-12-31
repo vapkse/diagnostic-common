@@ -2,7 +2,6 @@
 export const serialBufferMaxLength = 64;
 
 export interface AmpStep {
-    [key: string]: string | boolean;
     label: string;
     isError?: boolean;
 }
@@ -23,127 +22,127 @@ AmpSteps.set(13, { label: 'Normal Function' } as AmpStep);
 AmpSteps.set(14, { label: 'Error', isError: true } as AmpStep);
 
 // REQUEST params
-export const AmpRequest = new Map<string, number>();
-AmpRequest.set('reset', 70);
-AmpRequest.set('stop', 71);
-AmpRequest.set('writeParams', 80);
-AmpRequest.set('resetParams', 81);
-AmpRequest.set('resetModulation', 90);
-AmpRequest.set('getData', 100);
-AmpRequest.set('params', 110);
-AmpRequest.set('getParams', 111);
-AmpRequest.set('workingPoint', 112);
-AmpRequest.set('tempMeasureInterval', 114);
-AmpRequest.set('dischargeMaxTime', 115);
-AmpRequest.set('heatMaxTime', 116);
-AmpRequest.set('highVoltageMaxTime', 117);
-AmpRequest.set('regulationMaxTime', 118);
-AmpRequest.set('outOfRangeMaxTime', 119);
-AmpRequest.set('errorMaxTime', 120);
-AmpRequest.set('regulatedMinTime', 121);
-AmpRequest.set('highVoltageErrorMaxTime', 122);
-AmpRequest.set('emergencyStopDelay', 123);
-AmpRequest.set('startP', 124);
-AmpRequest.set('startMasterP', 124);
-AmpRequest.set('startI', 125);
-AmpRequest.set('startMasterI', 125);
-AmpRequest.set('startSlaveP', 126);
-AmpRequest.set('startSlaveI', 127);
-AmpRequest.set('regulationP', 128);
-AmpRequest.set('regulationMasterP', 128);
-AmpRequest.set('regulationI', 129);
-AmpRequest.set('regulationMasterI', 129);
-AmpRequest.set('regulationSlaveP', 130);
-AmpRequest.set('regulationSlaveI', 131);
-AmpRequest.set('functionP', 132);
-AmpRequest.set('functionMasterP', 132);
-AmpRequest.set('functionI', 133);
-AmpRequest.set('functionMasterI', 133);
-AmpRequest.set('functionSlaveP', 134);
-AmpRequest.set('functionSlaveI', 135);
-AmpRequest.set('regulationTreshold', 137);
-AmpRequest.set('startingTreshold', 138);
-AmpRequest.set('functionTreshold', 139);
-AmpRequest.set('measureAverageRatio', 140);
-AmpRequest.set('modulationPeakAverageRatio', 141);
-AmpRequest.set('modulationPeakReductionFactor', 142);
-AmpRequest.set('modulationDetectedMinTime', 143);
-AmpRequest.set('startWorkingPoint', 144);
-AmpRequest.set('minPoint', 145);
-AmpRequest.set('maxPoint', 146);
-AmpRequest.set('tempAirMax', 147);
-AmpRequest.set('tempRegulatorMax', 148);
-AmpRequest.set('tempAverageRatio', 149);
-AmpRequest.set('tempAirOffset', 150);
-AmpRequest.set('tempAirFactor', 151);
-AmpRequest.set('tempRegulatorOffset', 152);
-AmpRequest.set('tempRegulatorFactor', 153);
-AmpRequest.set('modulationLimit25', 154);
-AmpRequest.set('modulationLimit50', 155);
-AmpRequest.set('modulationLimit75', 156);
-AmpRequest.set('modulationLimit100', 157);
-AmpRequest.set('modulationCompensationFactor', 158);
-AmpRequest.set('minWorkingPoint', 159);
-AmpRequest.set('maxWorkingPoint', 160);
-AmpRequest.set('modulationPeakReductionTime', 162);
-AmpRequest.set('buttonPressedStandByTime', 163);
-AmpRequest.set('buttonPressedMinTime', 164);
-AmpRequest.set('buttonPressedModeTime', 165);
-AmpRequest.set('buttonPressedMaxTime', 166); // Deprecated
-AmpRequest.set('indicatorDetectModeMaxTime', 167);
-AmpRequest.set('indicatorDisplayModeMaxTime', 168);
-AmpRequest.set('indicatorMeasureFactor', 169);
-AmpRequest.set('indicatorPercentFactor', 170);
-AmpRequest.set('preStandByMaxTime', 171);
-AmpRequest.set('dischargeMinTime', 172);
-AmpRequest.set('autoWriteEepromDelay', 173);
-AmpRequest.set('phaseDetectionErrorMaxTime', 174);
-AmpRequest.set('buttonPressedResetTime', 175);
-AmpRequest.set('phaseDetectionErrorMaxCount', 177);
-AmpRequest.set('driverWorkingPoint', 178);
-AmpRequest.set('indicatorDampingFactor', 179);
-AmpRequest.set('heatMinTime', 180);
-AmpRequest.set('paramsFlags', 199);
-AmpRequest.set('controlsFlags', 201);
-AmpRequest.set('driverMeasureAverageRatio', 140);
-AmpRequest.set('finaleMeasureAverageRatio', 210);
-AmpRequest.set('driverMinPoint', 145);
-AmpRequest.set('finaleMinPoint', 211);
-AmpRequest.set('driverMaxPoint', 146);
-AmpRequest.set('finaleMaxPoint', 212);
+export const AmpParamsRequest = new Map<string, number>();
+AmpParamsRequest.set('reset', 70);
+AmpParamsRequest.set('stop', 71);
+AmpParamsRequest.set('writeParams', 80);
+AmpParamsRequest.set('resetParams', 81);
+AmpParamsRequest.set('resetModulation', 90);
+AmpParamsRequest.set('getData', 100);
+AmpParamsRequest.set('params', 110);
+AmpParamsRequest.set('getParams', 111);
+AmpParamsRequest.set('workingPoint', 112);
+AmpParamsRequest.set('tempMeasureInterval', 114);
+AmpParamsRequest.set('dischargeMaxTime', 115);
+AmpParamsRequest.set('heatMaxTime', 116);
+AmpParamsRequest.set('highVoltageMaxTime', 117);
+AmpParamsRequest.set('regulationMaxTime', 118);
+AmpParamsRequest.set('outOfRangeMaxTime', 119);
+AmpParamsRequest.set('errorMaxTime', 120);
+AmpParamsRequest.set('regulatedMinTime', 121);
+AmpParamsRequest.set('highVoltageErrorMaxTime', 122);
+AmpParamsRequest.set('emergencyStopDelay', 123);
+AmpParamsRequest.set('startP', 124);
+AmpParamsRequest.set('startMasterP', 124);
+AmpParamsRequest.set('startI', 125);
+AmpParamsRequest.set('startMasterI', 125);
+AmpParamsRequest.set('startSlaveP', 126);
+AmpParamsRequest.set('startSlaveI', 127);
+AmpParamsRequest.set('regulationP', 128);
+AmpParamsRequest.set('regulationMasterP', 128);
+AmpParamsRequest.set('regulationI', 129);
+AmpParamsRequest.set('regulationMasterI', 129);
+AmpParamsRequest.set('regulationSlaveP', 130);
+AmpParamsRequest.set('regulationSlaveI', 131);
+AmpParamsRequest.set('functionP', 132);
+AmpParamsRequest.set('functionMasterP', 132);
+AmpParamsRequest.set('functionI', 133);
+AmpParamsRequest.set('functionMasterI', 133);
+AmpParamsRequest.set('functionSlaveP', 134);
+AmpParamsRequest.set('functionSlaveI', 135);
+AmpParamsRequest.set('regulationTreshold', 137);
+AmpParamsRequest.set('startingTreshold', 138);
+AmpParamsRequest.set('functionTreshold', 139);
+AmpParamsRequest.set('measureAverageRatio', 140);
+AmpParamsRequest.set('modulationPeakAverageRatio', 141);
+AmpParamsRequest.set('modulationPeakReductionFactor', 142);
+AmpParamsRequest.set('modulationDetectedMinTime', 143);
+AmpParamsRequest.set('startWorkingPoint', 144);
+AmpParamsRequest.set('minPoint', 145);
+AmpParamsRequest.set('maxPoint', 146);
+AmpParamsRequest.set('tempAirMax', 147);
+AmpParamsRequest.set('tempRegulatorMax', 148);
+AmpParamsRequest.set('tempAverageRatio', 149);
+AmpParamsRequest.set('tempAirOffset', 150);
+AmpParamsRequest.set('tempAirFactor', 151);
+AmpParamsRequest.set('tempRegulatorOffset', 152);
+AmpParamsRequest.set('tempRegulatorFactor', 153);
+AmpParamsRequest.set('modulationLimit25', 154);
+AmpParamsRequest.set('modulationLimit50', 155);
+AmpParamsRequest.set('modulationLimit75', 156);
+AmpParamsRequest.set('modulationLimit100', 157);
+AmpParamsRequest.set('modulationCompensationFactor', 158);
+AmpParamsRequest.set('minWorkingPoint', 159);
+AmpParamsRequest.set('maxWorkingPoint', 160);
+AmpParamsRequest.set('modulationPeakReductionTime', 162);
+AmpParamsRequest.set('buttonPressedStandByTime', 163);
+AmpParamsRequest.set('buttonPressedMinTime', 164);
+AmpParamsRequest.set('buttonPressedModeTime', 165);
+AmpParamsRequest.set('buttonPressedMaxTime', 166); // Deprecated
+AmpParamsRequest.set('indicatorDetectModeMaxTime', 167);
+AmpParamsRequest.set('indicatorDisplayModeMaxTime', 168);
+AmpParamsRequest.set('indicatorMeasureFactor', 169);
+AmpParamsRequest.set('indicatorPercentFactor', 170);
+AmpParamsRequest.set('preStandByMaxTime', 171);
+AmpParamsRequest.set('dischargeMinTime', 172);
+AmpParamsRequest.set('autoWriteEepromDelay', 173);
+AmpParamsRequest.set('phaseDetectionErrorMaxTime', 174);
+AmpParamsRequest.set('buttonPressedResetTime', 175);
+AmpParamsRequest.set('phaseDetectionErrorMaxCount', 177);
+AmpParamsRequest.set('driverWorkingPoint', 178);
+AmpParamsRequest.set('indicatorDampingFactor', 179);
+AmpParamsRequest.set('heatMinTime', 180);
+AmpParamsRequest.set('paramsFlags', 199);
+AmpParamsRequest.set('controlsFlags', 201);
+AmpParamsRequest.set('driverMeasureAverageRatio', 140);
+AmpParamsRequest.set('finaleMeasureAverageRatio', 210);
+AmpParamsRequest.set('driverMinPoint', 145);
+AmpParamsRequest.set('finaleMinPoint', 211);
+AmpParamsRequest.set('driverMaxPoint', 146);
+AmpParamsRequest.set('finaleMaxPoint', 212);
 // Already defined -> driverWorkingPoint: workingPoint,
-AmpRequest.set('finaleWorkingPoint', 213);
-AmpRequest.set('driverStartingTreshold', 138);
-AmpRequest.set('finaleStartingTreshold', 214);
-AmpRequest.set('driverFunctionTreshold', 139);
-AmpRequest.set('finaleFunctionTreshold', 215);
-AmpRequest.set('driverRegulationMaxTime', 118);
-AmpRequest.set('finaleRegulationMaxTime', 216);
-AmpRequest.set('driverRegulatedMinTime', 121);
-AmpRequest.set('finaleRegulatedMinTime', 217);
-AmpRequest.set('finaleStartP', 218);
-AmpRequest.set('finaleStartI', 219);
-AmpRequest.set('finaleStartD', 220);
-AmpRequest.set('finaleRegulationP', 221);
-AmpRequest.set('finaleRegulationI', 222);
-AmpRequest.set('finaleRegulationD', 223);
-AmpRequest.set('finaleFunctionP', 224);
-AmpRequest.set('finaleFunctionI', 225);
-AmpRequest.set('driverRegulationP', 226);
-AmpRequest.set('driverRegulationI', 227);
-AmpRequest.set('driverFunctionP', 228);
-AmpRequest.set('driverFunctionI', 229);
-AmpRequest.set('driverRegulationTreshold', 137);
-AmpRequest.set('finaleRegulationTreshold', 230);
-AmpRequest.set('driverStartWorkingPoint', 144);
-AmpRequest.set('driverStartWorkingPoint1', 144);
-AmpRequest.set('driverStartWorkingPoint2', 231);
-AmpRequest.set('finaleStartWorkingPoint', 232);
-AmpRequest.set('driverOutOfRangeMaxTime', 119);
-AmpRequest.set('finaleOutOfRangeMaxTime', 233);
-AmpRequest.set('driverRegulationD', 234);
-AmpRequest.set('startD', 235);
-AmpRequest.set('regulationD', 236);
+AmpParamsRequest.set('finaleWorkingPoint', 213);
+AmpParamsRequest.set('driverStartingTreshold', 138);
+AmpParamsRequest.set('finaleStartingTreshold', 214);
+AmpParamsRequest.set('driverFunctionTreshold', 139);
+AmpParamsRequest.set('finaleFunctionTreshold', 215);
+AmpParamsRequest.set('driverRegulationMaxTime', 118);
+AmpParamsRequest.set('finaleRegulationMaxTime', 216);
+AmpParamsRequest.set('driverRegulatedMinTime', 121);
+AmpParamsRequest.set('finaleRegulatedMinTime', 217);
+AmpParamsRequest.set('finaleStartP', 218);
+AmpParamsRequest.set('finaleStartI', 219);
+AmpParamsRequest.set('finaleStartD', 220);
+AmpParamsRequest.set('finaleRegulationP', 221);
+AmpParamsRequest.set('finaleRegulationI', 222);
+AmpParamsRequest.set('finaleRegulationD', 223);
+AmpParamsRequest.set('finaleFunctionP', 224);
+AmpParamsRequest.set('finaleFunctionI', 225);
+AmpParamsRequest.set('driverRegulationP', 226);
+AmpParamsRequest.set('driverRegulationI', 227);
+AmpParamsRequest.set('driverFunctionP', 228);
+AmpParamsRequest.set('driverFunctionI', 229);
+AmpParamsRequest.set('driverRegulationTreshold', 137);
+AmpParamsRequest.set('finaleRegulationTreshold', 230);
+AmpParamsRequest.set('driverStartWorkingPoint', 144);
+AmpParamsRequest.set('driverStartWorkingPoint1', 144);
+AmpParamsRequest.set('driverStartWorkingPoint2', 231);
+AmpParamsRequest.set('finaleStartWorkingPoint', 232);
+AmpParamsRequest.set('driverOutOfRangeMaxTime', 119);
+AmpParamsRequest.set('finaleOutOfRangeMaxTime', 233);
+AmpParamsRequest.set('driverRegulationD', 234);
+AmpParamsRequest.set('startD', 235);
+AmpParamsRequest.set('regulationD', 236);
 
 export interface AmpError {
     descr: string;
@@ -219,9 +218,9 @@ export interface FieldInfo {
     type: string;
     name: string;
     title?: string;
-    fields?: Array<FieldInfo>;
+    fields?: ReadonlyArray<FieldInfo>;
     slider?: SliderInfo;
-    toggles?: Array<ToggleInfo>;
+    toggles?: ReadonlyArray<ToggleInfo>;
     index?: number;
 }
 
@@ -236,12 +235,9 @@ export interface AmpError {
     descr: string;
 }
 
-export interface StepInfo {
-    [key: string]: string | number | boolean;
-    label: string;
+export interface StepInfo extends AmpStep {
     labelColor?: string;
     range: number;
-    isError?: boolean;
 }
 
 export interface AmpInfoPicture {
@@ -263,32 +259,30 @@ export interface AmpInfoMeasure {
 }
 
 export type ControlPanelTypes = 'reset' | 'resetModulation' | 'stop';
-export type AmpInfoInterfaceTypes = string | number | boolean | Array<Tubeinfo> | Array<number> | ModulationInfo | Array<StepInfo> | Array<AmpInfoPicture> | Array<AmpInfoSchematic> | Array<AmpInfoMeasure> | Array<ControlPanelTypes>;
 
 export interface AmpInfoInterface {
-    [index: string]: AmpInfoTypes;
     name?: string;
-    id: number;
+    id?: number;
     description?: string;
     dampingfactor?: number;
     power?: string;
     bandwidth?: string;
     amplificationfactor?: number;
     inverter?: boolean;
-    tubes?: Array<Tubeinfo>;
+    tubes?: ReadonlyArray<Tubeinfo>;
     url?: string;
     valueFactor?: number;
     valueOffset?: number;
     valueUnit?: string;
     refFactor?: number;
     refOffset?: number;
-    outputLimits?: Array<number>;
-    dataInfos?: Array<FieldInfo>;
+    outputLimits?: ReadonlyArray<number>;
+    dataInfos?: ReadonlyArray<FieldInfo>;
     modulationInfos?: ModulationInfo;
-    steps?: Array<StepInfo>;
+    steps?: ReadonlyArray<StepInfo>;
     visible?: boolean;
-    controlsInfos?: Array<FieldInfo>;
-    paramsInfos?: Array<FieldInfo>;
+    controlsInfos?: ReadonlyArray<FieldInfo>;
+    paramsInfos?: ReadonlyArray<FieldInfo>;
     paramsPanelTitle?: string;
     master?: number;
     inherits?: number;
@@ -297,170 +291,165 @@ export interface AmpInfoInterface {
     order?: number;
     modFactor?: number;
     picturesPath?: string;
-    pictures?: Array<AmpInfoPicture>;
+    pictures?: ReadonlyArray<AmpInfoPicture>;
     schematicsPath?: string;
-    schematics?: Array<AmpInfoSchematic>;
+    schematics?: ReadonlyArray<AmpInfoSchematic>;
     measuresPath?: string;
-    measures?: Array<AmpInfoMeasure>;
-    controlsPanel?: Array<ControlPanelTypes>;
+    measures?: ReadonlyArray<AmpInfoMeasure>;
+    controlsPanel?: ReadonlyArray<ControlPanelTypes>;
 }
 
-export type AmpInfoMergeType = (baseInfos: AmpInfo) => void;
-export type AmpInfoTypes = AmpInfoInterfaceTypes | AmpStatus | AmpDataHeader | AmpInfoInterface | Map<number, StepInfo> | Set<ControlPanelTypes> | AmpInfoMergeType;
-
 export class AmpInfo implements AmpInfoInterface {
-    [index: string]: AmpInfoTypes;
-    public host: string;
-    public status: AmpStatus;
-    public port: string;
-    public datas: AmpDataHeader;
-
-    private _values: AmpInfoInterface;
-    private _stepMap: Map<number, StepInfo>;
-    private _controlsSet: Set<ControlPanelTypes>;
+    private values: AmpInfoInterface;
+    private _stepMap: Map<number, StepInfo> = undefined as never;
+    private _controlsSet: Set<ControlPanelTypes> = undefined as never;
 
     public constructor(values: AmpInfoInterface) {
-        this._values = values;
+        this.values = values;
     }
 
-    public get name(): string {
-        return this._values.name;
+    public get name(): string | undefined {
+        return this.values?.name;
     }
 
-    public get id(): number {
-        return this._values.id;
+    public get id(): number | undefined {
+        return this.values?.id;
     }
 
-    public get description(): string {
-        return this._values.description;
+    public get description(): string | undefined {
+        return this.values?.description;
     }
 
-    public get dampingfactor(): number {
-        return this._values.dampingfactor;
+    public get dampingfactor(): number | undefined {
+        return this.values?.dampingfactor;
     }
 
-    public get power(): string {
-        return this._values.power;
+    public get power(): string | undefined {
+        return this.values?.power;
     }
 
-    public get bandwidth(): string {
-        return this._values.bandwidth;
+    public get bandwidth(): string | undefined {
+        return this.values?.bandwidth;
     }
 
-    public get amplificationfactor(): number {
-        return this._values.amplificationfactor;
+    public get amplificationfactor(): number | undefined {
+        return this.values?.amplificationfactor;
     }
 
-    public get inverter(): boolean {
-        return this._values.inverter;
+    public get inverter(): boolean | undefined {
+        return this.values?.inverter;
     }
 
-    public get tubes(): Tubeinfo[] {
-        return this._values.tubes;
+    public get tubes(): ReadonlyArray<Tubeinfo> | undefined {
+        return this.values?.tubes;
     }
 
-    public get url(): string {
-        return this._values.url;
+    public get url(): string | undefined {
+        return this.values?.url;
     }
 
-    public get valueFactor(): number {
-        return this._values.valueFactor;
+    public get valueFactor(): number | undefined {
+        return this.values?.valueFactor;
     }
 
-    public get valueOffset(): number {
-        return this._values.valueOffset;
+    public get valueOffset(): number | undefined {
+        return this.values?.valueOffset;
     }
 
-    public get valueUnit(): string {
-        return this._values.valueUnit;
+    public get valueUnit(): string | undefined {
+        return this.values?.valueUnit;
     }
 
-    public get refFactor(): number {
-        return this._values.refFactor;
+    public get refFactor(): number | undefined {
+        return this.values?.refFactor;
     }
 
-    public get refOffset(): number {
-        return this._values.refOffset;
+    public get refOffset(): number | undefined {
+        return this.values?.refOffset;
     }
 
-    public get outputLimits(): number[] {
-        return this._values.outputLimits;
+    public get outputLimits(): ReadonlyArray<number> | undefined {
+        return this.values?.outputLimits;
     }
 
-    public get dataInfos(): FieldInfo[] {
-        return this._values.dataInfos;
+    public get dataInfos(): ReadonlyArray<FieldInfo> | undefined {
+        return this.values?.dataInfos;
     }
 
-    public get modulationInfos(): ModulationInfo {
-        return this._values.modulationInfos;
+    public get modulationInfos(): ModulationInfo | undefined {
+        return this.values?.modulationInfos;
     }
 
-    public get visible(): boolean {
-        return this._values.visible;
+    public get visible(): boolean | undefined {
+        return this.values?.visible;
     }
 
-    public get paramsInfos(): FieldInfo[] {
-        return this._values.paramsInfos;
+    public get paramsInfos(): ReadonlyArray<FieldInfo> | undefined {
+        return this.values?.paramsInfos;
     }
 
-    public get paramsPanelTitle(): string {
-        return this._values.paramsPanelTitle;
+    public get paramsPanelTitle(): string | undefined {
+        return this.values?.paramsPanelTitle;
     }
 
-    public get master(): number {
-        return this._values.master;
+    public get master(): number | undefined {
+        return this.values?.master;
     }
 
-    public get inherits(): number {
-        return this._values.inherits;
+    public get inherits(): number | undefined {
+        return this.values?.inherits;
     }
 
-    public get baseSection(): boolean {
-        return this._values.baseSection;
+    public get baseSection(): boolean | undefined {
+        return this.values?.baseSection;
     }
 
-    public get order(): number {
-        return this._values.order;
+    public get order(): number | undefined {
+        return this.values?.order;
     }
 
-    public get modFactor(): number {
-        return this._values.modFactor;
+    public get modFactor(): number | undefined {
+        return this.values?.modFactor;
     }
 
-    public get picturesPath(): string {
-        return this._values.picturesPath;
+    public get picturesPath(): string | undefined {
+        return this.values?.picturesPath;
     }
 
-    public get pictures(): AmpInfoPicture[] {
-        return this._values.pictures;
+    public get pictures(): ReadonlyArray<AmpInfoPicture> | undefined {
+        return this.values?.pictures;
     }
 
-    public get schematicsPath(): string {
-        return this._values.schematicsPath;
+    public get schematicsPath(): string | undefined {
+        return this.values?.schematicsPath;
     }
 
-    public get schematics(): AmpInfoSchematic[] {
-        return this._values.schematics;
+    public get schematics(): ReadonlyArray<AmpInfoSchematic> | undefined {
+        return this.values?.schematics;
     }
 
-    public get measuresPath(): string {
-        return this._values.measuresPath;
+    public get measuresPath(): string | undefined {
+        return this.values?.measuresPath;
     }
 
-    public get measures(): AmpInfoMeasure[] {
-        return this._values.measures;
+    public get measures(): ReadonlyArray<AmpInfoMeasure> | undefined {
+        return this.values?.measures;
     }
 
-    public get controlsPanel(): ControlPanelTypes[] {
-        return this._values.controlsPanel;
+    public get controlsPanel(): ReadonlyArray<ControlPanelTypes> | undefined {
+        return this.values?.controlsPanel;
     }
 
-    public get isMaster(): boolean {
-        return this._values.isMaster;
+    public get isMaster(): boolean | undefined {
+        return this.values?.isMaster;
     }
 
-    public set isMaster(value: boolean) {
-        this._values.isMaster = value;
+    public set isMaster(value: boolean | undefined) {
+        if (!this.values) {
+            return;
+        }
+
+        this.values.isMaster = value;
     }
 
     public get stepMap(): Map<number, StepInfo> {
@@ -468,10 +457,10 @@ export class AmpInfo implements AmpInfoInterface {
             return this._stepMap;
         }
 
-        if (!this._values.steps) {
+        if (!this.values?.steps) {
             this._stepMap = new Map<number, StepInfo>();
         } else {
-            this._stepMap = this._values.steps.reduce((m, step, index) => m.set(index, step || {} as StepInfo), new Map<number, StepInfo>());
+            this._stepMap = this.values.steps.reduce((m, step, index) => m.set(index, step || {} as StepInfo), new Map<number, StepInfo>());
         }
 
         // Merge steps with default
@@ -479,9 +468,10 @@ export class AmpInfo implements AmpInfoInterface {
             const defaultStep = AmpSteps.get(key);
             if (defaultStep) {
                 Object.keys(defaultStep)
+                    .map(k => k as keyof AmpStep)
                     .filter(k => step[k] === undefined)
                     .forEach(k => {
-                        step[k] = defaultStep[k];
+                        step[k] = defaultStep[k] as never;
                     });
             }
         });
@@ -496,40 +486,52 @@ export class AmpInfo implements AmpInfoInterface {
 
         this._controlsSet = new Set<ControlPanelTypes>();
 
-        if (this._values.controlsPanel) {
-            this._controlsSet = this._values.controlsPanel.reduce((s, control) => s.add(control), this._controlsSet);
+        if (this.values.controlsPanel) {
+            this._controlsSet = this.values.controlsPanel.reduce((s, control) => s.add(control), this._controlsSet);
         }
 
         return this._controlsSet;
     }
 
     public merge(baseInfos: AmpInfo): void {
-        const val = this._values;
-        const base = baseInfos._values;
+        const val = this.values;
+        const base = baseInfos.values;
 
         Object.keys(base)
+            .map(key => key as keyof AmpInfoInterface)
             .filter(key => val[key] === undefined)
             .forEach(key => {
-                val[key] = base[key];
+                val[key] = base[key] as never;
             });
 
-        this._stepMap = undefined;
+        this._stepMap = undefined as never;
     }
 }
 
-export type AmpResponseTypes = number | number[];
+export interface AmpIndexedValue {
+    [index: string]: number;
+}
+
+export interface AmpRequest {
+    id: number;
+    msg: number;
+    value: number;
+}
 
 export interface AmpResponse {
-    [index: string]: AmpResponseTypes;
     id: number;
     msg: number;
     errorNumber: number;
     extraValue: number;
 }
 
-export interface AmpDataResponse {
+export interface AmpRequestResponse {
+    id: number;
+    msg: number;
     port: string;
-    datas: AmpDataHeader;
+    error?: string;
+    datas?: AmpDataHeader;
+    nextTime: number;
 }
 
 export interface AmpDataHeader extends AmpResponse {
@@ -541,20 +543,25 @@ export interface AmpDataHeader extends AmpResponse {
     tick: number;
     // Client fields
     ctrlflags?: number;
-    temp?: number;
-    val?: number[];
-    out?: number[];
-    min?: number | number[];
-    max?: number | number[];
-    ref?: number | number[];
-    modlimits?: number[];
+    temp?: AmpIndexedValue;
+    val?: AmpIndexedValue;
+    out?: AmpIndexedValue;
+    min?: number | AmpIndexedValue;
+    max?: number | AmpIndexedValue;
+    ref?: number | AmpIndexedValue;
+    modlimits?: AmpIndexedValue;
 }
 
 export interface AmpStatus {
+    id: number;
     status: number;
     statusText: string;
+    step: number;
     lastseen: number;
     interval?: string;
+    port: string;
+    master: number;
+    inherits: number;
     flags?: boolean; // Indicate if working point is manual or differential feedback is off
 }
 
