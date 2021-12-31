@@ -59,5 +59,6 @@ export interface Artist {
     strTwitter: string;
     strWebsite: string;
     strAudioDB: string;
+    strMusicBrainz: string;
     error: Error;
 }
