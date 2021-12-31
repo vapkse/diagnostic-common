@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/naming-convention */
 
 export interface NowPlayingResponse {
     artists: ReadonlyArray<string>;
@@ -27,6 +28,7 @@ export interface Artist {
     strArtistThumb: string;
     strArtistWideThumb: string;
     strBiography: string;
+    strBiographyEN: string;
     strBiographyCN: string;
     strBiographyDE: string;
     strBiographyES: string;
@@ -56,5 +58,7 @@ export interface Artist {
     strStyle: string;
     strTwitter: string;
     strWebsite: string;
+    strAudioDB: string;
+    strMusicBrainz: string;
     error: Error;
 }
