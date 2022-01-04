@@ -2,9 +2,10 @@
 
 export interface NowPlayingResponse {
     artists: ReadonlyArray<string>;
-    album: string;
-    title: string;
+    album?: string;
+    title?: string;
     artistsInfos: Array<Artist>;
+    errors: Array<Error>;
 }
 
 export interface Artist {
